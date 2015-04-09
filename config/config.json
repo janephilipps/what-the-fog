@@ -1,22 +1,16 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
+    "database": "fog_app_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "database": "fog_app_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "database": "fog_app_production",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
