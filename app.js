@@ -44,7 +44,13 @@ app.get('/contact', function(req, res) {
 // Route to list users
 
 app.get('/users', function(req, res) {
+	res.render('users/index')
+});
 
+// Route to new user
+
+app.get('/users/new/', function(req, res) {
+	res.render('users/new');
 });
 
 // Route to show user
@@ -56,12 +62,6 @@ app.get('/users/:id', function(req, res) {
 // Route to edit user
 
 app.get('/users/:id/edit', function(req, res) {
-
-});
-
-// Route to new user
-
-app.get('/users/new', function(req, res) {
 
 });
 
@@ -86,7 +86,13 @@ app.get('/users/:id', function(req, res) {
 // Route to list locations
 
 app.get('/locations', function(req, res) {
+	res.render('locations/index')
+});
 
+// Route to new location
+
+app.get('/locations/new', function(req, res) {
+	res.render('locations/new');
 });
 
 // Route to show location
@@ -98,12 +104,6 @@ app.get('/locations/:id', function(req, res) {
 // Route to edit location
 
 app.get('/locations/:id/edit', function(req, res) {
-
-});
-
-// Route to new location
-
-app.get('/locations/new', function(req, res) {
 
 });
 
