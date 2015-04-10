@@ -143,7 +143,7 @@ app.get('/signup', function(req,res){
 });
 
 app.post('/login', function(req,res){
-    res.send("I'm a login");
+    res.send("success!");
 });
 
 app.post('/signup', function(req,res){
