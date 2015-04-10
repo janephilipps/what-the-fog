@@ -18,7 +18,7 @@ var app = express();
 app.set('view engine', 'ejs');
 
 // Set up body parser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Set up method override to work with POST requests that have the parameter "_method=DELETE"
 app.use(methodOverride('_method'))
@@ -65,9 +65,18 @@ app.get('/users/:id/edit', function(req, res) {
 
 });
 
-// Route to create user
+// Route to create user via sign-up form
 
 app.post('/users', function(req, res) {
+	// grab the user from the params
+  var user = req.body.user;
+
+  // create the new user
+  db.User.
+    createSecure(user.email, user.password).
+    then(function(){
+        res.send("SIGNED UP!");
+      });
 
 });
 
@@ -123,6 +132,30 @@ app.get('/locations/:id', function(req, res) {
 
 app.get('/locations/:id', function(req, res) {
 
+});
+
+app.get('/login', function(req,res){
+    res.send("I'm a login");
+});
+
+app.get('/signup', function(req,res){
+    res.send("I'm a signup");
+});
+
+app.post('/login', function(req,res){
+    res.send("I'm a login");
+});
+
+app.post('/signup', function(req,res){
+    res.send("I'm a signup");
+});
+
+app.delete('/logout', function(req,res){
+    res.send("I'm a delete");
+});
+
+app.get('/profile', function(req,res){
+    res.send("I'm a profile");
 });
 
 
