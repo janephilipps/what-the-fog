@@ -28,6 +28,35 @@ app.use(session({
 	saveUninitialized: true
 }))
 
+// Set up login
+
+app.use("/", function (req, res, next) {
+
+  req.login = function (user) {
+    req.session.userId = user.id;
+  };
+
+  req.currentUser = function () {
+    return db.User.
+      find({
+        where: {
+          id: req.session.userId
+       }
+      }).
+      then(function (user) {
+        req.user = user;
+        return user;
+      })
+  };
+
+  req.logout = function () {
+    req.session.userId = null;
+    req.user = null;
+  }
+
+  next(); 
+});
+
 // Set up method override to work with POST requests that have the parameter "_method=DELETE"
 app.use(methodOverride('_method'))
 
@@ -53,7 +82,31 @@ app.get('/contact', function(req, res) {
 
 app.get('/login', function(req, res) {
 	res.render('site/login');
-})
+});
+
+// Route to login as a user
+
+app.post('/login', function(req, res) {
+	var user = req.body.user;
+	var email = req.body.user.email;
+	var password = req.body.user.password;
+
+	db.User
+		.authenticate(email, password)
+		.then(function (user) {
+			req.login(user);
+			res.redirect('/profile');
+		});
+});
+
+// Route to profile page
+
+app.get('/profile', function(req, res) {
+	req.currentUser()
+		.then(function (user) {
+			res.render('users/profile', {user: user});
+		});
+});
 
 // Route to list users
 
@@ -101,28 +154,18 @@ app.post('/users/:id', function(req, res) {
 
 	// check that the user exists in the db
 	db.User.
-		authenticate(email, password).
-		find( {where: {email: email} } ).
-		then(function() {
-			res.redirect('/users/profile');
-		})
+		authenticate(email, password)
+		.then(function(user){
+			res.render('users/profile', {user: user});
+		});
 
 });
-
-// app.get("users/profile", function (req, res) {
-// 	req.currentUser()
-// 		.then(function (user) {
-// 			res.render("profile", {user: user});
-// 		});
-// });
 
 // Route to edit user
 
 app.get('/users/:id/edit', function(req, res) {
 
 });
-
-
 
 // Route to update user - *PATCH*
 
@@ -178,32 +221,15 @@ app.get('/locations/:id', function(req, res) {
 
 });
 
-// app.get('/login', function(req,res){
-//     res.send("I'm a login");
-// });
-
-// app.get('/signup', function(req,res){
-//     res.send("I'm a signup");
-// });
-
-// app.post('/login', function(req,res){
-//     res.send("success!");
-// });
-
-// app.post('/signup', function(req,res){
-//     res.send("I'm a signup");
-// });
-
-// app.delete('/logout', function(req,res){
-//     res.send("I'm a delete");
-// });
-
-// app.get('/profile', function(req,res){
-//     res.send("I'm a profile");
-// });
-
-
-// Start the server on port 3000
-app.listen(3000);
+// Make sure db tables are associated
+  db.sequelize.sync().then(function() {
+	// Start the server
+    var server = app.listen(3000, function() {
+    // This part just adds a snazzy listening message:
+    console.log(new Array(51).join("*"));
+    console.log("\t LISTENING ON: \n\t\t localhost:3000");
+    console.log(new Array(51).join("*")); 
+  });
+});
     
     
