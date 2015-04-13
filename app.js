@@ -9,7 +9,7 @@ var bcrypt = require("bcrypt"),
 	methodOverride = require("method-override"),
 	pgHstore = require("pg-hstore"),
 	request = require("request"),
-	session = require("session");
+	session = require("express-session");
 	// need to check docs socket = require("socket.io");
 
 // Instantiate express app
@@ -22,11 +22,11 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Set up sessions
-// app.use(session({
-// 	secret: 'super secret',
-// 	resave: false,
-// 	saveUninitialized: true
-// }))
+app.use(session({
+	secret: 'super secret',
+	resave: false,
+	saveUninitialized: true
+}))
 
 // Set up method override to work with POST requests that have the parameter "_method=DELETE"
 app.use(methodOverride('_method'))
@@ -86,7 +86,12 @@ app.post('/users', function(req, res) {
 // Route to show user
 
 app.get('/users/:id', function(req, res) {
-	res.render('/users/:id');
+	req.currentUser()
+		.then(function (user) {
+			res.render("profile", {user: user})
+		})
+
+	res.render('/users/id');
 })
 
 app.post('/users/:id', function(req, res) {
@@ -99,10 +104,17 @@ app.post('/users/:id', function(req, res) {
 		authenticate(email, password).
 		find( {where: {email: email} } ).
 		then(function() {
-			res.redirect('/users/:id');
+			res.redirect('/users/profile');
 		})
 
 });
+
+// app.get("users/profile", function (req, res) {
+// 	req.currentUser()
+// 		.then(function (user) {
+// 			res.render("profile", {user: user});
+// 		});
+// });
 
 // Route to edit user
 

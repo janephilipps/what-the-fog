@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes){
   var User = sequelize.define('User', {
     email: { 
       type: DataTypes.STRING, 
-      unique: true, 
+      unique: true,
       validate: {
         len: [6, 30],
       }
@@ -42,8 +42,12 @@ module.exports = function (sequelize, DataTypes){
         return hash;
       },
       createSecure: function(email, password, zip) {
+        // If password is too short, throw error
         if(password.length < 6) {
           throw new Error("Password too short");
+        // If username already exists in db, throw new error
+        } else if (email === this.find( { where: {email: email} } )) {
+          throw new Error("User already created");
         }
         return this.create({
           email: email,
