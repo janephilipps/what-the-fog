@@ -1,7 +1,13 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var Location = sequelize.define("Location", {
-    zip: DataTypes.INTEGER,
+    zip: {
+      type: DataTypes.INTEGER,
+      validate: {
+        len: [5],
+      }
+    },
+    
     long: DataTypes.INTEGER,
     lat: DataTypes.INTEGER
   }, {
