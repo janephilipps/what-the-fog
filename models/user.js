@@ -32,6 +32,11 @@ module.exports = function (sequelize, DataTypes){
       }
     },
     classMethods: {
+
+      associate: function(models) {
+        this.hasMany(models.Location);
+      },
+
       encryptPassword: function(password) {
         var hash = bcrypt.hashSync(password, salt);
         return hash;

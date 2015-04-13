@@ -9,7 +9,7 @@ var bcrypt = require("bcrypt"),
 	methodOverride = require("method-override"),
 	pgHstore = require("pg-hstore"),
 	request = require("request"),
-	session = require("express-session");
+	session = require("session");
 	// need to check docs socket = require("socket.io");
 
 // Instantiate express app
@@ -22,11 +22,11 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Set up sessions
-app.use(session({
-	secret: 'super secret',
-	resave: false,
-	saveUninitialized: true
-}))
+// app.use(session({
+// 	secret: 'super secret',
+// 	resave: false,
+// 	saveUninitialized: true
+// }))
 
 // Set up method override to work with POST requests that have the parameter "_method=DELETE"
 app.use(methodOverride('_method'))
