@@ -8,7 +8,8 @@ var bcrypt = require("bcrypt"),
 	express = require("express"),
 	methodOverride = require("method-override"),
 	pgHstore = require("pg-hstore"),
-	request = require("request");
+	request = require("request"),
+	session = require("express-session");
 	// need to check docs socket = require("socket.io");
 
 // Instantiate express app
@@ -19,6 +20,13 @@ app.set('view engine', 'ejs');
 
 // Set up body parser
 app.use(bodyParser.urlencoded({extended: true}));
+
+// Set up sessions
+app.use(session({
+	secret: 'super secret',
+	resave: false,
+	saveUninitialized: true
+}))
 
 // Set up method override to work with POST requests that have the parameter "_method=DELETE"
 app.use(methodOverride('_method'))
@@ -40,6 +48,12 @@ app.get('/about', function(req, res) {
 app.get('/contact', function(req, res) {
 	res.render('site/contact');
 });
+
+// Route to login page
+
+app.get('/login', function(req, res) {
+	res.render('site/login');
+})
 
 // Route to list users
 
@@ -64,7 +78,7 @@ app.post('/users', function(req, res) {
   db.User.
     createSecure(email, password).
     then(function(){
-        res.redirect("site/login");
+        res.redirect("/login");
       });
 
 });
@@ -72,6 +86,21 @@ app.post('/users', function(req, res) {
 // Route to show user
 
 app.get('/users/:id', function(req, res) {
+	res.render('/users/:id');
+})
+
+app.post('/users/:id', function(req, res) {
+	// grab the user from the login page
+	var email = req.body.email;
+	var password = req.body.password;
+
+	// check that the user exists in the db
+	db.User.
+		authenticate(email, password).
+		find( {where: {email: email} } ).
+		then(function() {
+			res.redirect('/users/:id');
+		})
 
 });
 
