@@ -6,8 +6,19 @@
 	<body>
 		<h1>Fog App | Search Locations</h1>
 		<form action="/search" method="GET">
-	        <input type="text" name="q3" placeholder="Search">
+	        <input type="text" name="zip" placeholder="Zip Code">
 	        <button type="submit">Search</button>
     	</form>
+
+    	<div class="row">
+			<% if (noZips) { %>
+			<div class=""> No results </div>
+			<% } %>
+		</div>
+		<div class="row">
+			Latitude: <%= JSON.stringify(zips.coord.lat) %>
+			<br>
+			Longitude: <%= JSON.stringify(zips.coord.lon) %>
+		</div>
 	</body>
 </html>
