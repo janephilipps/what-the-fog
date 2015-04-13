@@ -231,5 +231,3 @@ app.get('/search', function(req, res) {
     console.log(new Array(51).join("*")); 
   });
 });
-    
-    
