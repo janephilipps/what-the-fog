@@ -204,7 +204,7 @@ app.get('/locations/:id', function(req, res) {
 app.get('/search', function(req, res) {
 	var zipSearch = req.query.q3;
 	if (!zipSearch) {
-		res.render('search', {zips: [], noZips: true});
+		res.render('/site/search', {zips: [], noZips: true});
 	} else {
 		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipSearch;
 		request(url, function(err, resp, body) {
@@ -213,9 +213,9 @@ app.get('/search', function(req, res) {
 				console.log("I'm in here 2");
 				var jsonData = JSON.parse(body);
 				if (!jsonData.Search) {
-					res.render('search', {zips: [], noZips: true});
+					res.render('/site/search', {zips: [], noZips: true});
 				}
-				res.render('search', {zips: jsonData.Search, noZips: false});
+				res.render('/site/search', {zips: jsonData.Search, noZips: false});
 			}
 		});
 	}
