@@ -2,9 +2,9 @@
 module.exports = function(sequelize, DataTypes) {
   var Location = sequelize.define("Location", {
     zip: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       validate: {
-        len: [5],
+        len: [4,6],
       }
     },
     
