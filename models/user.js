@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes){
       type: DataTypes.STRING, 
       unique: true,
       validate: {
-        len: [6, 30],
+        len: [6, 30]
       }
     },
     passwordDigest: {
@@ -18,9 +18,9 @@ module.exports = function (sequelize, DataTypes){
       }
     },
     zip: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       validate: {
-        len: [5],
+        len: [4,6]
       }
     }
   },
@@ -46,14 +46,14 @@ module.exports = function (sequelize, DataTypes){
         if(password.length < 6) {
           throw new Error("Password too short");
         // If username already exists in db, throw new error
-        } else if (email === this.find( { where: {email: email} } )) {
-          throw new Error("User already created");
-        }
+        } else {
+          console.log("WERE GETTING HER\n\n\n\n\nE");
         return this.create({
           email: email,
           passwordDigest: this.encryptPassword(password),
           zip: zip
         });
+      }
 
       },
       authenticate: function(email, password) {

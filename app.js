@@ -29,7 +29,6 @@ app.use(session({
 }))
 
 // Set up login
-
 app.use("/", function (req, res, next) {
 
   req.login = function (user) {
@@ -61,31 +60,26 @@ app.use("/", function (req, res, next) {
 app.use(methodOverride('_method'))
 
 // Route to site index
-
 app.get('/', function(req, res) {
 	res.render('site/index');
 });
 
 // Route to site about
-
 app.get('/about', function(req, res) {
 	res.render('site/about');
 });
 
 // Route to site contact
-
 app.get('/contact', function(req, res) {
 	res.render('site/contact');
 });
 
 // Route to login page
-
 app.get('/login', function(req, res) {
 	res.render('site/login');
 });
 
 // Route to login as a user
-
 app.post('/login', function(req, res) {
 	var user = req.body.user;
 	var email = req.body.user.email;
@@ -100,7 +94,6 @@ app.post('/login', function(req, res) {
 });
 
 // Route to profile page
-
 app.get('/profile', function(req, res) {
 	req.currentUser()
 		.then(function (user) {
@@ -109,27 +102,25 @@ app.get('/profile', function(req, res) {
 });
 
 // Route to list users
-
 app.get('/users', function(req, res) {
 	res.render('users/index')
 });
 
 // Route to new user
-
 app.get('/users/new/', function(req, res) {
 	res.render('users/new');
 });
 
 // Route to create user via sign-up form
-
 app.post('/users', function(req, res) {
 	// grab the user from the form
   var email = req.body.email;
   var password = req.body.password;
+  var zip = req.body.zip;
 
   // create the new user
   db.User.
-    createSecure(email, password).
+    createSecure(email, password, zip).
     then(function(){
         res.redirect("/login");
       });
@@ -137,7 +128,6 @@ app.post('/users', function(req, res) {
 });
 
 // Route to show user
-
 app.get('/users/:id', function(req, res) {
 	req.currentUser()
 		.then(function (user) {
@@ -162,61 +152,51 @@ app.post('/users/:id', function(req, res) {
 });
 
 // Route to edit user
-
 app.get('/users/:id/edit', function(req, res) {
 
 });
 
 // Route to update user - *PATCH*
-
 app.get('/users/:id', function(req, res) {
 
 });
 
 // Route to delete user - *DELETE*
-
 app.get('/users/:id', function(req, res) {
 
 });
 
 // Route to list locations
-
 app.get('/locations', function(req, res) {
 	res.render('locations/index')
 });
 
 // Route to new location
-
 app.get('/locations/new', function(req, res) {
 	res.render('locations/new');
 });
 
 // Route to show location
-
 app.get('/locations/:id', function(req, res) {
 
 });
 
 // Route to edit location
-
 app.get('/locations/:id/edit', function(req, res) {
 
 });
 
 // Route to create location
-
 app.post('/locations', function(req, res) {
 
 });
 
 // Route to update location - *PATCH*
-
 app.get('/locations/:id', function(req, res) {
 
 });
 
 // Route to delete location - *DELETE*
-
 app.get('/locations/:id', function(req, res) {
 
 });
