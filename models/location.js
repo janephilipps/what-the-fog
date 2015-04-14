@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     
     long: DataTypes.INTEGER,
-    lat: DataTypes.INTEGER
+    lat: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

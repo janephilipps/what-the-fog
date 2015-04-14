@@ -215,8 +215,8 @@ app.post('/locations', function(req, res) {
 app.get('/locations/:id', function(req, res) {
 	var id = req.params.id;
 	db.Location.find(id)
-		.then(function() {
-			res.render('locations/location', {zip: {}, lat: {}, long: {}, });
+		.then(function(id) {
+			res.render('locations/location', {id: id});
 		})
 	
 });
@@ -276,10 +276,10 @@ app.get('/locations/:id', function(req, res) {
 // 	}))
 // })
 
-	// Start the server
-    var server = app.listen(3000, function() {
-    // This part just adds a snazzy listening message:
-    console.log(new Array(51).join("*"));
-    console.log("\t LISTENING ON: \n\t\t localhost:3000");
-    console.log(new Array(51).join("*")); 
-  });
+// Start the server
+var server = app.listen(3000, function() {
+// This part just adds a snazzy listening message:
+	console.log(new Array(51).join("*"));
+  console.log("\t LISTENING ON: \n\t\t localhost:3000");
+  console.log(new Array(51).join("*")); 
+ });
