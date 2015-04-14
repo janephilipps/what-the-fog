@@ -234,30 +234,30 @@ app.get('/locations/:id', function(req, res) {
 });
 
 
-app.get('/search', function(req, res) {
-	res.render('site/search', {zips: [], noZips: true});
-});
+// app.get('/search', function(req, res) {
+// 	res.render('site/search', {zips: [], noZips: true});
+// });
 
-app.post('/search', function(req, res) {
-	var zipSearch = req.body.zip;
-	console.log(req.body);
-	if (!zipSearch) {
-		res.render('site/search', {zips: [], noZips: true});
-	} else {
-		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipSearch;
-		request(url, function(err, resp, body) {
-			console.log("I'm in here 1")
-			if (!err && resp.statusCode === 200) {
-				console.log("I'm in here 2");
-				var jsonData = JSON.parse(body);
-				if (!jsonData) {
-					res.redirect('site/search', {zips: [], noZips: true});
-				}
-				res.redirect('site/search', {zips: jsonData, noZips: false});
-			}
-		});
-	}
-});
+// app.post('/search', function(req, res) {
+// 	var zipSearch = req.body.zip;
+// 	console.log(req.body);
+// 	if (!zipSearch) {
+// 		res.render('site/search', {zips: [], noZips: true});
+// 	} else {
+// 		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipSearch;
+// 		request(url, function(err, resp, body) {
+// 			console.log("I'm in here 1")
+// 			if (!err && resp.statusCode === 200) {
+// 				console.log("I'm in here 2");
+// 				var jsonData = JSON.parse(body);
+// 				if (!jsonData) {
+// 					res.redirect('site/search', {zips: [], noZips: true});
+// 				}
+// 				res.redirect('site/search', {zips: jsonData, noZips: false});
+// 			}
+// 		});
+// 	}
+// });
 
 // *Brett's special code*
 
