@@ -168,7 +168,10 @@ app.get('/users/:id', function(req, res) {
 
 // Route to list locations
 app.get('/locations', function(req, res) {
-	res.render('locations/index')
+	db.Location.findAll()
+	 	.then(function (zip, lat, long) {
+	 		res.render('locations/index', {zipList: zip, latList: lat, longList: long})
+	 	})
 });
 
 // Route to page to add new location
@@ -195,7 +198,7 @@ app.post('/locations', function(req, res) {
 				// Create data in Locations DB
 				var lat = jsonData.coord.lat;
 				var lon = jsonData.coord.lon;
-				db.Location.create({zip: zipSearch, lat: lat, long: lon})
+				db.Location.create({zip: zipSearch, lat: lat, long: lon, UserId: req.session.UserId})
 					.then(function(zip, lat, long) {
 						// Redirect to locations
 						res.redirect('/locations');
@@ -210,7 +213,12 @@ app.post('/locations', function(req, res) {
 
 // Route to show location
 app.get('/locations/:id', function(req, res) {
-	res.render('locations/location', {zip: {}, lat: {}, lon: {}, id: req.params.id});
+	var id = req.params.id;
+	db.Location.find(id)
+		.then(function() {
+			res.render('locations/location', {zip: {}, lat: {}, long: {}, });
+		})
+	
 });
 
 // Route to edit location

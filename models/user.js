@@ -47,7 +47,7 @@ module.exports = function (sequelize, DataTypes){
           throw new Error("Password too short");
         // If username already exists in db, throw new error
         } else {
-          console.log("WERE GETTING HER\n\n\n\n\nE");
+          console.log("WERE GETTING HERE\n\n\n\n\n");
         return this.create({
           email: email,
           passwordDigest: this.encryptPassword(password),
