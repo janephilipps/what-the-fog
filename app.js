@@ -171,14 +171,46 @@ app.get('/locations', function(req, res) {
 	res.render('locations/index')
 });
 
-// Route to new location
+// Route to page to add new location
 app.get('/locations/new', function(req, res) {
 	res.render('locations/new');
 });
 
+// Route to add new location
+app.post('/locations', function(req, res) {
+	var zipSearch = req.body.zip;
+	console.log(zipSearch);
+	if (!zipSearch) {
+		// res.redirect('/locations');
+	} else {
+		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipSearch;
+		request(url, function(err, resp, body) {
+			console.log("I'm in here 1")
+			if (!err && resp.statusCode === 200) {
+				console.log("I'm in here 2");
+				var jsonData = JSON.parse(body);
+				// if (!jsonData) {
+				// 	res.redirect('/locations', {zips: [], noZips: true});
+				// }
+				// Create data in Locations DB
+				var lat = jsonData.coord.lat;
+				var lon = jsonData.coord.lon;
+				db.Location.create({zip: zipSearch, lat: lat, long: lon})
+					.then(function(zip, lat, long) {
+						// Redirect to locations
+						res.redirect('/locations');
+					})
+				
+			} else {
+				console.log("I didn't make it");
+			}
+		});
+	}
+});
+
 // Route to show location
 app.get('/locations/:id', function(req, res) {
-
+	res.render('locations/location', {zip: {}, lat: {}, lon: {}, id: req.params.id});
 });
 
 // Route to edit location
@@ -201,8 +233,14 @@ app.get('/locations/:id', function(req, res) {
 
 });
 
+
 app.get('/search', function(req, res) {
-	var zipSearch = req.query.zip;
+	res.render('site/search', {zips: [], noZips: true});
+});
+
+app.post('/search', function(req, res) {
+	var zipSearch = req.body.zip;
+	console.log(req.body);
 	if (!zipSearch) {
 		res.render('site/search', {zips: [], noZips: true});
 	} else {
@@ -213,16 +251,23 @@ app.get('/search', function(req, res) {
 				console.log("I'm in here 2");
 				var jsonData = JSON.parse(body);
 				if (!jsonData) {
-					res.render('site/search', {zips: [], noZips: true});
+					res.redirect('site/search', {zips: [], noZips: true});
 				}
-				res.render('site/search', {zips: jsonData, noZips: false});
+				res.redirect('site/search', {zips: jsonData, noZips: false});
 			}
 		});
 	}
 });
 
-// Make sure db tables are associated
-  db.sequelize.sync().then(function() {
+// *Brett's special code*
+
+// app.get('/sync', function(req, res) {
+// 	db.sequelize.sync( {force: true} )
+// 	.then(function( {
+// 		res.send("DB synced successfully");
+// 	}))
+// })
+
 	// Start the server
     var server = app.listen(3000, function() {
     // This part just adds a snazzy listening message:
@@ -230,4 +275,3 @@ app.get('/search', function(req, res) {
     console.log("\t LISTENING ON: \n\t\t localhost:3000");
     console.log(new Array(51).join("*")); 
   });
-});
