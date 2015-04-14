@@ -10,7 +10,11 @@
 			<ul>
 				<li>Latitude: <%= id.lat %></li>
 				<li>Longitude: <%= id.long %></li>
+				<div id="cloud">
+					<%= results.currently.cloudCover %>
+				</div>
 			</ul>
 		</div>
+		<script src="/js/style.js"></script>
 	</body>
 </html>

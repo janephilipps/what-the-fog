@@ -9,7 +9,8 @@ var bcrypt = require("bcrypt"),
 	methodOverride = require("method-override"),
 	pgHstore = require("pg-hstore"),
 	request = require("request"),
-	session = require("express-session");
+	session = require("express-session"),
+	env = process.env;
 	// need to check docs socket = require("socket.io");
 
 // Instantiate express app
@@ -28,18 +29,22 @@ app.use(session({
 	saveUninitialized: true
 }))
 
+// Set up static assets
+
+app.use(express.static('public'));
+
 // Set up login
 app.use("/", function (req, res, next) {
 
   req.login = function (user) {
-    req.session.userId = user.id;
+    req.session.UserId = user.id;
   };
 
   req.currentUser = function () {
     return db.User.
       find({
         where: {
-          id: req.session.userId
+          id: req.session.UserId
        }
       }).
       then(function (user) {
@@ -49,7 +54,7 @@ app.use("/", function (req, res, next) {
   };
 
   req.logout = function () {
-    req.session.userId = null;
+    req.session.UserId = null;
     req.user = null;
   }
 
@@ -211,13 +216,23 @@ app.post('/locations', function(req, res) {
 	}
 });
 
+
+
 // Route to show location
 app.get('/locations/:id', function(req, res) {
 	var id = req.params.id;
 	db.Location.find(id)
 		.then(function(id) {
-			res.render('locations/location', {id: id});
-		})
+			var url = "https://api.forecast.io/forecast/" + env.MY_API_KEY + "/" + id.lat + "," + id.long;
+			console.log(url);
+			request(url, function(err, resp, body) {
+				if (!err && resp.statusCode === 200) {
+					var result = JSON.parse(body);
+					res.render('locations/location', {id: id, results: result});
+				}
+			});
+			//res.render('locations/location', {id: id});
+		});
 	
 });
 
