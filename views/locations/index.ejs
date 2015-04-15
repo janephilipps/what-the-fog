@@ -6,16 +6,8 @@
 		<header>
 			<% include ../partials/header %>
 		</header>
-		<h1>Locations</h1>
-		<% for (var i = 0; i < zipList.length; i++) { %>
-		<div>
-			Zip Code: <a href="/locations/<%= zipList[i].id %>"><%= zipList[i].zip %></a>
-			<br>
-			Latitude: <%= zipList[i].lat %>
-			<br>
-			Longitude: <%= zipList[i].long %>
-		</div>
-		<% } %>
+		<h1>User Id: <%= userId %></h1>
+		
 		<footer>
 			<% include ../partials/footer %>
 		</footer>

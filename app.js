@@ -177,14 +177,6 @@ app.delete('/logout', function(req, res) {
 	res.redirect('/login');
 })
 
-// Route to list locations
-app.get('/locations', function(req, res) {
-	db.Location.findAll()
-	 	.then(function (zip, lat, long) {
-	 		res.render('locations/index', {zipList: zip, latList: lat, longList: long})
-	 	})
-});
-
 // Route to page to add new location
 app.get('/locations/new', function(req, res) {
 	res.render('locations/new');
@@ -222,8 +214,6 @@ app.post('/locations', function(req, res) {
 	}
 });
 
-
-
 // Route to show location
 app.get('/locations/:id', function(req, res) {
 	var id = req.params.id;
@@ -240,6 +230,42 @@ app.get('/locations/:id', function(req, res) {
 			//res.render('locations/location', {id: id});
 		});
 	
+});
+
+// Route to list locations
+app.get('/locations', function(req, res) {
+
+	// db.Location.findAll({
+	// 	where: {UserId: req.session.UserId}
+	// }).then(function(UserId) {
+	// 	res.send(UserId);
+	// })
+
+	// var user = req.currentUser();
+	// console.log(user);
+
+	req.currentUser()
+		.then(function(user) {
+			console.log(user.dataValues.id);
+			(res.render('locations/index', {userId: user.dataValues.id}));
+			// db.Location.findAll({
+			//  where {
+			//  	UserId : user.dataValues.id
+			//  }
+			// })
+			// 	.then(function (zip, lat, long) {
+			// 		res.render('locations/index', {zipList: zip, latList: lat, longList: long})
+			// 	})
+		})
+
+	// (console.log(user._boundTo.attributes.id)); 
+	// req.currentUser()
+	// .then(function(UserId) {
+	// 	db.Location.findAll( { where: { UserId : UserId } } )
+	// 			.then(function (zip, lat, long) {
+	// 				res.render('locations/index', {zipList: zip, latList: lat, longList: long})
+	// 			})
+	// })
 });
 
 // Route to edit location
@@ -261,32 +287,6 @@ app.get('/locations/:id', function(req, res) {
 app.get('/locations/:id', function(req, res) {
 
 });
-
-
-// app.get('/search', function(req, res) {
-// 	res.render('site/search', {zips: [], noZips: true});
-// });
-
-// app.post('/search', function(req, res) {
-// 	var zipSearch = req.body.zip;
-// 	console.log(req.body);
-// 	if (!zipSearch) {
-// 		res.render('site/search', {zips: [], noZips: true});
-// 	} else {
-// 		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipSearch;
-// 		request(url, function(err, resp, body) {
-// 			console.log("I'm in here 1")
-// 			if (!err && resp.statusCode === 200) {
-// 				console.log("I'm in here 2");
-// 				var jsonData = JSON.parse(body);
-// 				if (!jsonData) {
-// 					res.redirect('site/search', {zips: [], noZips: true});
-// 				}
-// 				res.redirect('site/search', {zips: jsonData, noZips: false});
-// 			}
-// 		});
-// 	}
-// });
 
 // *Brett's special code*
 
