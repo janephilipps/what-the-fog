@@ -1,9 +1,11 @@
 <html>
 	<head>
-		<title>Cloud App</title>
-		
+		<% include ../partials/head %>
 	</head>
 	<body>
+		<header>
+			<% include ../partials/header %>
+		</header>
 		<h1>Cloud App | Locations</h1>
 		<% for (var i = 0; i < zipList.length; i++) { %>
 		<div>
@@ -14,6 +16,9 @@
 			Longitude: <%= zipList[i].long %>
 		</div>
 		<% } %>
+		<footer>
+			<% include ../partials/footer %>
+		</footer>
 		
 	</body>
 </html>

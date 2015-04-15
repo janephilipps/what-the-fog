@@ -1,9 +1,11 @@
 <html>
 	<head>
-		<title>Cloud App</title>
-		
+		<% include ../partials/head %>
 	</head>
 	<body>
+		<header>
+			<% include ../partials/header %>
+		</header>
 		<h1>Cloud App | Profile</h1>
 
 		Welcome, <%= user.email  %>!
@@ -15,5 +17,8 @@
 		<form action="/logout?_method=DELETE" method="POST">
 	        <button type="submit">Logout</button>
     	</form>
+    	<footer>
+			<% include ../partials/footer %>
+		</footer>
 	</body>
 </html>

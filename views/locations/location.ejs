@@ -1,10 +1,12 @@
 <html>
 	<head>
-		<title>Cloud App</title>
+		<% include ../partials/head %>
 		<link rel="stylesheet" href="/css/style.css">
-		
 	</head>
 	<body>
+		<header>
+			<% include ../partials/header %>
+		</header>
 		<h1>Cloud App | Location</h1>
 		<div>
 		Zip Code: <%= id.zip %>
@@ -16,6 +18,9 @@
 
 			<div><p id="cloud"><%= results.currently.cloudCover %></p></div>
 		</div>
+		<footer>
+			<% include ../partials/footer %>
+		</footer>
 		<script src="/js/style.js"></script>
 	</body>
 </html>
