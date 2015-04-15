@@ -232,7 +232,20 @@ app.get('/locations/:id', function(req, res) {
 				if (!err && resp.statusCode === 200) {
 					// Set variable result to the parsed JSON data
 					var result = JSON.parse(body);
-					results.isFoggy = isFoggy(1,2);
+
+					// function IsFoggy(temp, dewPoint) {
+     // 				if (temp > dewPoint) {
+     // 			 		if (temp - dewPoint <= 4) {
+     // 						return true;
+     // 					} else if (dewPoint - temp <= 4) {
+     // 						return true;
+     // 					}
+     // 				} else {
+     // 					return false;
+     // 				}
+     // 			}
+    
+					// results.isFoggy = isFoggy(result.currently.temperature,result.currently.dewPoint);
 					// Render the individual location view passing the location id and result
 					res.render('locations/location', {id: id, results: result});
 				}
