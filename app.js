@@ -216,14 +216,24 @@ app.post('/locations', function(req, res) {
 
 // Route to show location
 app.get('/locations/:id', function(req, res) {
+	// Set id variable
 	var id = req.params.id;
+	// Find location in the db by id
 	db.Location.find(id)
+		// Then call forecast.io API with that location's lat & long coords
 		.then(function(id) {
+			// Set url variable for API call
 			var url = "https://api.forecast.io/forecast/" + env.MY_API_KEY + "/" + id.lat + "," + id.long;
+			// Log API url
 			console.log(url);
+			// Call API
 			request(url, function(err, resp, body) {
+				// If no errors
 				if (!err && resp.statusCode === 200) {
+					// Set variable result to the parsed JSON data
 					var result = JSON.parse(body);
+					results.isFoggy = isFoggy(1,2);
+					// Render the individual location view passing the location id and result
 					res.render('locations/location', {id: id, results: result});
 				}
 			});
@@ -234,38 +244,17 @@ app.get('/locations/:id', function(req, res) {
 
 // Route to list locations
 app.get('/locations', function(req, res) {
-
-	// db.Location.findAll({
-	// 	where: {UserId: req.session.UserId}
-	// }).then(function(UserId) {
-	// 	res.send(UserId);
-	// })
-
-	// var user = req.currentUser();
-	// console.log(user);
-
 	req.currentUser()
 		.then(function(user) {
-			console.log(user.dataValues.id);
-			(res.render('locations/index', {userId: user.dataValues.id}));
-			// db.Location.findAll({
-			//  where {
-			//  	UserId : user.dataValues.id
-			//  }
-			// })
-			// 	.then(function (zip, lat, long) {
-			// 		res.render('locations/index', {zipList: zip, latList: lat, longList: long})
-			// 	})
+			db.Location.findAll({
+				where: {
+					UserId : user.id
+				}
+			})
+			.then(function(locations) {
+				(res.render('locations/index', {locationsList: locations, userId: user.id}));
+			})
 		})
-
-	// (console.log(user._boundTo.attributes.id)); 
-	// req.currentUser()
-	// .then(function(UserId) {
-	// 	db.Location.findAll( { where: { UserId : UserId } } )
-	// 			.then(function (zip, lat, long) {
-	// 				res.render('locations/index', {zipList: zip, latList: lat, longList: long})
-	// 			})
-	// })
 });
 
 // Route to edit location
