@@ -8,11 +8,21 @@ window.onload = function() {
 	var foggy = isFoggy();
 
 	if (foggy) {
-		fog.innerHTML = "FOGGY";
-	} else if (!foggy) {
-		fog.innerHTML = "NOT FOGGY";
+		fog.innerHTML = "Yep!";
+		fog.setAttribute("style", "opacity: .5");
 	} else {
-		fog.innerHTML = "WTF";
+		fog.innerHTML = "Nope!";
+		fog.setAttribute("style", "opacity: 1")
+	}
+
+	if (opacity >= 0 && opacity < .25) {
+		cloudy.innerHTML = "A little."
+	} else if (opacity >= .25 && opacity < .5) {
+		cloudy.innerHTML = "Kinda sorta."
+	} else if (opacity >= .5 && opacity < .75) {
+		cloudy.innerHTML = "Totally."
+	} else {
+		cloudy.innerHTML = "Much clouds."
 	}
 
 	// fog.setAttribute("style", "background-color: rgba(128,")
