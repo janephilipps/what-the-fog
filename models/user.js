@@ -42,19 +42,34 @@ module.exports = function (sequelize, DataTypes){
         return hash;
       },
       createSecure: function(email, password, zip) {
+        // console.log("hi " + (typeof this.findAndCountAll( { where: { email: email } })));
         // If password is too short, throw error
         if(password.length < 6) {
           throw new Error("Password too short");
-        // If username already exists in db, throw new error
         } else {
-          console.log("WERE GETTING HERE\n\n\n\n\n");
-        return this.create({
-          email: email,
-          passwordDigest: this.encryptPassword(password),
-          zip: zip
-        });
-      }
-
+          // Else, check if user already exists in db
+          // Create variable for nested object User
+          var _this = this
+          // Return User db count where email is the same as email passed through function/entered into form
+          return this.count( {where: { email: email } } )
+            // Then run this function on userCount
+            .then( function(userCount) {
+              // Log count # in console
+              console.log("count returned " + JSON.stringify(userCount));
+              // Check if userCount is greater than 1 (aka check if email in db already)
+              if (userCount >= 1) {
+                // If true, throw error
+                throw new Error("Email already exists");
+              } else {
+                // Else, instantiate new User! (Hooray!)
+                console.log("WERE GETTING HERE\n\n\n\n\n");
+                return _this.create({
+                  email: email,
+                  passwordDigest: _this.encryptPassword(password),
+                  zip: zip });
+              }
+            });
+        }
       },
       authenticate: function(email, password) {
         // find a user in the DB
