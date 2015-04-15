@@ -1,14 +1,19 @@
 <html>
 	<head>
-		<title>Fog App</title>
+		<title>Cloud App</title>
 		
 	</head>
 	<body>
-		<h1>Fog App | Profile</h1>
+		<h1>Cloud App | Profile</h1>
 
 		Welcome, <%= user.email  %>!
 		<br>
+		<a href="/locations">Your saved locations</a>
+		<br>
 		<a href="/locations/new">Add new location</a>
-		
+
+		<form action="/logout?_method=DELETE" method="POST">
+	        <button type="submit">Logout</button>
+    	</form>
 	</body>
 </html>

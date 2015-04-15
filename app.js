@@ -171,6 +171,12 @@ app.get('/users/:id', function(req, res) {
 
 });
 
+// Route to logout user
+app.delete('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/login');
+})
+
 // Route to list locations
 app.get('/locations', function(req, res) {
 	db.Location.findAll()
