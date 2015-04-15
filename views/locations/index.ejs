@@ -11,10 +11,6 @@
         <% for (var i = 0; i < locationsList.length; i++) { %>
         <div>
             Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
-            <br>
-            Latitude: <%= locationsList[i].lat %>
-            <br>
-            Longitude: <%= locationsList[i].long %>
         </div>
         <% } %>
 		<footer>

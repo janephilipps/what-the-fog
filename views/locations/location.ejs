@@ -13,11 +13,15 @@
 			<ul>
 				<li>Latitude: <%= id.lat %></li>
 				<li>Longitude: <%= id.long %></li>
-				<li>Cloud Cover:</li>
+				<li>Temperature: <%= results.currently.temperature %></li>
+				<li>Dew Point: <%= results.currently.dewPoint %></li>
+				<li>Cloud Cover:
+					<div><p id="cloud"><%= results.currently.cloudCover %></p></div>
+					</div>
+				</li>
 			</ul>
 
-			<div><p id="cloud"><%= results.currently.cloudCover %></p></div>
-		</div>
+			
 		<footer>
 			<% include ../partials/footer %>
 		</footer>
