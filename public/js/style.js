@@ -8,10 +8,10 @@ window.onload = function() {
 	var foggy = isFoggy();
 
 	if (foggy) {
-		fog.innerHTML = "Yep!";
+		fog.innerHTML = "Yep.";
 		fog.setAttribute("style", "opacity: .5");
 	} else {
-		fog.innerHTML = "Nope!";
+		fog.innerHTML = "Nope.";
 		fog.setAttribute("style", "opacity: 1")
 	}
 
