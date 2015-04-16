@@ -152,15 +152,15 @@ app.post('/users', function(req, res) {
     });
 });
 
-// Route to show user
-app.get('/users/:id', function(req, res) {
-	req.currentUser()
-		.then(function (user) {
-			res.render("profile", {user: user})
-		})
+// // Route to show user
+// app.get('/users/:id', function(req, res) {
+// 	req.currentUser()
+// 		.then(function (user) {
+// 			res.render("profile", {user: user})
+// 		})
 
-	res.render('/users/id');
-})
+// 	res.render('/users/id');
+// })
 
 app.post('/users/:id', function(req, res) {
 	// grab the user from the login page
@@ -300,7 +300,7 @@ app.get('/locations/:id', function(req, res) {
 
 });
 
-// *Brett's special code*
+// Special code
 
 // app.get('/sync', function(req, res) {
 // 	db.sequelize.sync( {force: true} )
