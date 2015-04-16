@@ -10,9 +10,6 @@
     "dialect": "postgres"
   },
   "production": {
-    "database": "fog_app_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
     "use_env_variable": "HEROKU_POSTGRESQL_CRIMSON_URL"
   }
 }
