@@ -19,17 +19,17 @@ window.onload = function() {
 	// console.log(typeof opacity);
 
 	if (opacity === 0) {
-		cloudy.innerHTML = "Not a cloud in the sky!";
+		cloudy.innerHTML = "Not cloudy.";
 	} else if (opacity > 0 && opacity < .25) {
-		cloudy.innerHTML = "A little.";
+		cloudy.innerHTML = "A little cloudy.";
 	} else if (opacity >= .25 && opacity < .5) {
-		cloudy.innerHTML = "Kinda sorta.";
+		cloudy.innerHTML = "Kinda sorta cloudy.";
 	} else if (opacity >= .5 && opacity < .75) {
-		cloudy.innerHTML = "Totally.";
+		cloudy.innerHTML = "Totally cloudy.";
 	} else if (opacity >= .75 && opacity < 1) {
 		cloudy.innerHTML = "Much clouds.";
 	} else {
-		cloudy.innerHTML = "Too much clouds.";
+		cloudy.innerHTML = "Too cloudy.";
 	}
 
 	// fog.setAttribute("style", "background-color: rgba(128,")
