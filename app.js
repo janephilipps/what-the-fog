@@ -98,18 +98,28 @@ app.post('/login', function(req, res) {
 		});
 });
 
-// Route to profile page
+// Route to profile page with saved location list
 app.get('/profile', function(req, res) {
+	// Request current User
 	req.currentUser()
-		.then(function (user) {
-			res.render('users/profile', {user: user});
-		});
+			// Then find all Locations for current User
+			.then(function(user) {
+				db.Location.findAll({
+					where: {
+						UserId : user.id
+					}
+				})
+				// Then render profile page with user, userId, and locationsList
+				.then(function(locations) {
+					(res.render('users/profile', {user: user, locationsList: locations, userId: user.id}));
+				})
+			})
 });
 
-// Route to list users
-app.get('/users', function(req, res) {
-	res.render('users/index')
-});
+// // Route to list users
+// app.get('/users', function(req, res) {
+// 	res.render('users/index')
+// });
 
 // Route to new user
 app.get('/users/new/', function(req, res) {
