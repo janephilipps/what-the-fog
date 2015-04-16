@@ -9,4 +9,17 @@ body {
 		padding-right: 5%;
 	}
 
+	/*form {
+		margin-left: auto;
+		margin-right: auto;
+	}*/
+
+	form input {
+		text-align: center;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+
 }
