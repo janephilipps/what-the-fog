@@ -3,7 +3,6 @@ var db = require('./models');
 var bcrypt = require("bcrypt"),
 	salt = bcrypt.genSaltSync(10),
 	bodyParser = require("body-parser"),
-	// need to check docs bootstrap = require("bootstrap"),
 	ejs = require("ejs"),
 	express = require("express"),
 	methodOverride = require("method-override"),
@@ -11,7 +10,6 @@ var bcrypt = require("bcrypt"),
 	request = require("request"),
 	session = require("express-session"),
 	env = process.env;
-	// need to check docs socket = require("socket.io");
 
 // Instantiate express app
 var app = express();
@@ -30,7 +28,6 @@ app.use(session({
 }))
 
 // Set up static assets
-
 app.use(express.static('public'));
 
 // Set up login
