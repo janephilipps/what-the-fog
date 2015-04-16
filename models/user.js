@@ -42,10 +42,16 @@ module.exports = function (sequelize, DataTypes){
         return hash;
       },
       createSecure: function(email, password, zip) {
+        var error = {};
+        error.errors = [];
+        error.hasErrored = false;
+
         // console.log("hi " + (typeof this.findAndCountAll( { where: { email: email } })));
         // If password is too short, throw error
         if(password.length < 6) {
           throw new Error("Password too short");
+          error.errors.push(encodeURI("Your password is too short!"));
+          error.hasErrored = true;
         } else {
           // Else, check if user already exists in db
           // Create variable for nested object User
@@ -60,6 +66,8 @@ module.exports = function (sequelize, DataTypes){
               if (userCount >= 1) {
                 // If true, throw error
                 throw new Error("Email already exists");
+                error.errors.push(encodedURI("Email already exists!"));
+                error.hasErrored = true;
               } else {
                 // Else, instantiate new User! (Hooray!)
                 console.log("WERE GETTING HERE\n\n\n\n\n");

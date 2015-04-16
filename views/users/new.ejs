@@ -8,6 +8,20 @@
 		</header>
 		<div class="page-wrap">
 			<div class="container">
+
+				<!-- If an error occurs -->
+				<% if (err) {
+
+					err.forEach(function(errorMessage)) {
+
+				%>
+
+					<div class="error"><%= errorMessage %></div>
+
+				<% }); // Ends the forEach loop
+				} // Ends the if statement
+				%>
+
 				<h1>Sign Up</h1>
 				<form action="/users" method="POST">
 			        <input type="text" name="email" placeholder="Email Address">

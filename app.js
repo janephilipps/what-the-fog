@@ -123,7 +123,13 @@ app.get('/profile', function(req, res) {
 
 // Route to new user
 app.get('/users/new/', function(req, res) {
-	res.render('users/new');
+	var err = req.query.err || false;
+
+	if (err !== false) {
+		res.render('users/new', { err: err.split(":")});
+	} else {
+		res.render('users/new', { err: false});
+	}
 });
 
 // Route to create user via sign-up form
@@ -137,9 +143,12 @@ app.post('/users', function(req, res) {
   db.User.
     createSecure(email, password, zip).
     then(function(){
-        res.redirect("/login");
-      });
-
+    	if (user.errors) {
+    		res.redirect('users/new?=' + user.errors.join(":"));
+    	} else {
+    		res.redirect("/login");
+    	}
+    });
 });
 
 // Route to show user
