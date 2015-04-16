@@ -7,6 +7,19 @@
 			<% include ../partials/header %>
 		</header>
 		<h1>About</h1>
+		<div>
+		function isFoggy(temp, dewPoint) {
+     		if (temp > dewPoint) {
+     			if (temp - dewPoint <= 4) {
+     				return true;
+     			} else if (dewPoint - temp <= 4) {
+     				return true;
+     			}
+     		} else {
+     			return false;
+     		}
+     	}
+     	</div>
 		<footer>
 			<% include ../partials/footer %>
 		</footer>
