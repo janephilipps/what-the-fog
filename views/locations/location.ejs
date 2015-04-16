@@ -4,8 +4,10 @@
 		<link rel="stylesheet" href="/css/style.css">
 		<script>
 
-		function isFoggy(temp, dewPoint) {
-     		if (temp > dewPoint) {
+		// Fogarithm
+
+		function isFoggy(temp, dewPoint, visibility) {
+     		if (visibility < 1) {
      			if (temp - dewPoint <= 4) {
      				return true;
      			} else if (dewPoint - temp <= 4) {
@@ -16,7 +18,7 @@
      		}
      	}
 
-     	isFoggy(results.currently.temperature, results.currently.dewPoint);
+     	isFoggy(results.currently.temperature, results.currently.dewPoint, results.currently.visibility);
 
 		</script>
 	</head>
@@ -33,11 +35,11 @@
 				<li>Longitude: <%= id.long %></li>
 				<li>Temperature: <%= results.currently.temperature %></li>
 				<li>Dew Point: <%= results.currently.dewPoint %></li>
+				<li>Visibility: <%= results.currently.visibility %></li>
 				<li>Cloud Cover:
-					<div><p id="cloud"><%= results.currently.cloudCover %></p></div>
-					</div>
-				</li>
+				<div id="cloud"><%= results.currently.cloudCover %></div></li>
 			</ul>
+
 			<div><h3>Foggy?<p id="fog"></p></h3></div>
 			<div><h3>Cloudy?<p id="cloudy"></p></h3></div>
 
