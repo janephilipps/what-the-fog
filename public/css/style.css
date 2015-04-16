@@ -2,8 +2,17 @@
 	text-align: center;
 	width: 200px;
 	height: 200px;
+	/*display: block;
+	position: relative;*/
 	border-radius: 100%;
 }
+
+/*#cloud::after {
+	background:url(/img/cloud.png) no-repeat;
+	content: "";
+	position: absolute;
+	z-index: 1;
+}*/
 
 #cloud p {
 	padding-top: 50px;
