@@ -47,6 +47,14 @@ footer a {
 		margin-right: 5%;
 	}
 
+	#location {
+		text-align: center;
+	}
+
+	#cloud {
+		margin: 0 auto auto;
+	}
+
 	/* Centering and spacing form inputs for mobile */
 	form input {
 		text-align: center;

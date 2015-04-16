@@ -26,23 +26,26 @@
 		<header>
 			<% include ../partials/header %>
 		</header>
+		<div class="container">
 		<a href="/profile">Back to Profile</a>
 		<h1>Zip Code: <%= id.zip %></h1>
-		<div>
-		
-			<ul>
-				<li>Latitude: <%= id.lat %></li>
-				<li>Longitude: <%= id.long %></li>
-				<li>Temperature: <%= results.currently.temperature %></li>
-				<li>Dew Point: <%= results.currently.dewPoint %></li>
-				<li>Visibility: <%= results.currently.visibility %></li>
-				<li>Cloud Cover:
-				<div id="cloud"><%= results.currently.cloudCover %></div></li>
-			</ul>
+		<div id="location">
+			<p>Latitude: <%= id.lat %></p>
+			<p>Longitude: <%= id.long %></p>
+			<p>Temperature: <%= results.currently.temperature %></p>
+			<p>Dew Point: <%= results.currently.dewPoint %></p>
+			<p>Visibility: <%= results.currently.visibility %></p>
+			<p>Cloud Cover:</p>
+			<row>
+				<div class=".col-xs-4 .col-sm-4"></div>
+				<div class=".col-xs-4 .col-sm-4" id="cloud"><%= results.currently.cloudCover %></div>
+				<div class=".col-xs-4 .col-sm-4"></div>
+			</row>
 
 			<div><h3>Foggy?<p id="fog"></p></h3></div>
 			<div><h3>Cloudy?<p id="cloudy"></p></h3></div>
-
+		</div>
+	</div>
 			
 		<footer>
 			<% include ../partials/footer %>
