@@ -6,12 +6,17 @@
 		<header>
 			<% include ../partials/header %>
 		</header>
-		<a href="/profile">Back to Profile</a>
-		<h1>Add Location</h1>
-		<form action="/locations" method="POST">
-	        <input type="text" name="zip" placeholder="Zip Code">
-	        <button type="submit">Submit</button>
-    	</form>
+		<div class="page-wrap">
+			<div class="container">
+				<a href="/profile">Back to Profile</a>
+				<h1>Add Location</h1>
+				<form action="/locations" method="POST">
+			        <input type="text" name="zip" placeholder="Zip Code">
+			        <button type="submit">Submit</button>
+		    	</form>
+		    	<br>
+		    </div>
+		</div>
     	<footer>
 			<% include ../partials/footer %>
 		</footer>

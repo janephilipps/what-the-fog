@@ -6,13 +6,18 @@
 		<header>
 			<% include ../partials/header %>
 		</header>
-		<h1>Sign Up</h1>
-		<form action="/users" method="POST">
-	        <input type="text" name="email" placeholder="Email Address">
-	        <input type="password" name="password" placeholder="Password">
-	        <!-- <input type="text" name="zip" placeholder="Zip Code"> -->
-	        <button type="submit">Create Account</button>
-    	</form>
+		<div class="page-wrap">
+			<div class="container">
+				<h1>Sign Up</h1>
+				<form action="/users" method="POST">
+			        <input type="text" name="email" placeholder="Email Address">
+			        <input type="password" name="password" placeholder="Password">
+			        <!-- <input type="text" name="zip" placeholder="Zip Code"> -->
+			        <button type="submit">Create Account</button>
+		    	</form>
+		    	<br>
+		    </div>
+		   </div>
     	<footer>
 			<% include ../partials/footer %>
 		</footer>
