@@ -7,10 +7,15 @@ a {
 	color: white;
 }
 
-a:hover {
+body a:hover {
 	color: grey;
 	text-decoration: none;
 }
+
+/*body a:visited {
+	color: white;
+	text-decoration: none;
+}*/
 
 .contact {
 	display: block;
@@ -50,12 +55,12 @@ footer a {
 
 /* TABLET STYLES */
 @media (min-width: 768px) {
+
 	body {
-		padding-left: 5%;
+		margin-left: 5%;
 	}
-}
 
-
-
-
+	footer {
+		text-align: left;
+	}
 }

@@ -169,20 +169,20 @@ app.post('/users/:id', function(req, res) {
 
 });
 
-// Route to edit user
-app.get('/users/:id/edit', function(req, res) {
+// // Route to edit user
+// app.get('/users/:id/edit', function(req, res) {
 
-});
+// });
 
-// Route to update user - *PATCH*
-app.get('/users/:id', function(req, res) {
+// // Route to update user - *PATCH*
+// app.get('/users/:id', function(req, res) {
 
-});
+// });
 
-// Route to delete user - *DELETE*
-app.get('/users/:id', function(req, res) {
+// // Route to delete user - *DELETE*
+// app.get('/users/:id', function(req, res) {
 
-});
+// });
 
 // Route to logout user
 app.delete('/logout', function(req, res) {
@@ -195,14 +195,18 @@ app.get('/locations/new', function(req, res) {
 	res.render('locations/new');
 });
 
-// Route to add new location
+// Route to add a new location
 app.post('/locations', function(req, res) {
-	var zipSearch = req.body.zip;
-	console.log(zipSearch);
-	if (!zipSearch) {
-		// res.redirect('/locations');
+	// Create variable zipCode
+	var zipCode = req.body.zip;
+	// Log variable zipCode
+	console.log(zipCode);
+	// If zipCode is undefined or invalid, throw error
+	if (!zipCode) {
+		// throw new Error("Invalid zip code");
+	// Else call Open Weather Map API	
 	} else {
-		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipSearch;
+		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode;
 		request(url, function(err, resp, body) {
 			console.log("I'm in here 1")
 			if (!err && resp.statusCode === 200) {
@@ -214,10 +218,10 @@ app.post('/locations', function(req, res) {
 				// Create data in Locations DB
 				var lat = jsonData.coord.lat;
 				var lon = jsonData.coord.lon;
-				db.Location.create({zip: zipSearch, lat: lat, long: lon, UserId: req.session.UserId})
+				db.Location.create({zip: zipCode, lat: lat, long: lon, UserId: req.session.UserId})
 					.then(function(zip, lat, long) {
 						// Redirect to locations
-						res.redirect('/locations');
+						res.redirect('/profile');
 					})
 				
 			} else {
@@ -264,7 +268,7 @@ app.get('/locations', function(req, res) {
 				}
 			})
 			.then(function(locations) {
-				(res.render('locations/index', {locationsList: locations, userId: user.id}));
+				(res.render('users/profile', {locationsList: locations, userId: user.id}));
 			})
 		})
 });
