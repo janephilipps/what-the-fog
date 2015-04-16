@@ -35,11 +35,11 @@ app.use(express.static('public'));
 
 // Set up login
 app.use("/", function (req, res, next) {
-
+	// Define login request
   req.login = function (user) {
     req.session.UserId = user.id;
   };
-
+  // Define current user request
   req.currentUser = function () {
     return db.User.
       find({
@@ -52,7 +52,7 @@ app.use("/", function (req, res, next) {
         return user;
       })
   };
-
+  // Define logout request
   req.logout = function () {
     req.session.UserId = null;
     req.user = null;
@@ -86,14 +86,17 @@ app.get('/login', function(req, res) {
 
 // Route to login as a user
 app.post('/login', function(req, res) {
+	// Set variables for user, email, password
 	var user = req.body.user;
 	var email = req.body.user.email;
 	var password = req.body.user.password;
-
+	// In db User, authenticate email & password entered into login form
 	db.User
 		.authenticate(email, password)
+		// Then request to login as that user
 		.then(function (user) {
 			req.login(user);
+			// Redirect to profile page
 			res.redirect('/profile');
 		});
 });
@@ -238,7 +241,7 @@ app.get('/locations/:id', function(req, res) {
 			console.log(url);
 			// Call API
 			request(url, function(err, resp, body) {
-				// If no errors
+				// If no errors and response status code is 200
 				if (!err && resp.statusCode === 200) {
 					// Set variable result to the parsed JSON data
 					var result = JSON.parse(body);

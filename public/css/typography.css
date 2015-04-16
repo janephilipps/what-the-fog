@@ -1,25 +1,61 @@
 body {
 	font-family: Futura;
+	background-color: darkgrey
 }
 
-@media (max-width: 400px) {
+a {
+	color: white;
+}
+
+a:hover {
+	color: grey;
+	text-decoration: none;
+}
+
+.contact {
+	display: block;
+}
+
+header {
+	background-color: white;
+
+}
+
+footer {
+	background-color: white;
+	color: black;
+}
+
+footer a {
+	color: black;
+}
+
+/* MOBILE STYLES */
+
+@media (max-width: 767px) {
 	body {
 		text-align: center;
-		padding-left: 5%;
-		padding-right: 5%;
 	}
 
-	/*form {
-		margin-left: auto;
-		margin-right: auto;
-	}*/
-
+	/* Centering and spacing form inputs for mobile */
 	form input {
 		text-align: center;
 		display: block;
+		margin-top: 2%;
+		margin-bottom: 2%;
 		margin-left: auto;
 		margin-right: auto;
 
 	}
+
+/* TABLET STYLES */
+@media (min-width: 768px) {
+	body {
+		padding-left: 5%;
+	}
+}
+
+
+
 
 }
