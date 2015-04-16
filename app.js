@@ -143,11 +143,12 @@ app.post('/users', function(req, res) {
   db.User.
     createSecure(email, password, zip).
     then(function(){
-    	if (user.errors) {
-    		res.redirect('users/new?=' + user.errors.join(":"));
-    	} else {
-    		res.redirect("/login");
-    	}
+    	res.redirect("/login");
+    	// if (user.errors) {
+    	// 	res.redirect('users/new?=' + user.errors.join(":"));
+    	// } else {
+    	// 	res.redirect("/login");
+    	// }
     });
 });
 
