@@ -309,7 +309,7 @@ app.get('/locations/:id', function(req, res) {
 // })
 
 // Start the server
-var server = app.listen(3000, function() {
+var server = app.listen(process.env.PORT || 3000, function() {
 // This part just adds a snazzy listening message:
 	console.log(new Array(51).join("*"));
   console.log("\t LISTENING ON: \n\t\t localhost:3000");
