@@ -42,6 +42,11 @@ footer a {
 		text-align: center;
 	}
 
+	#about {
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
 	/* Centering and spacing form inputs for mobile */
 	form input {
 		text-align: center;
