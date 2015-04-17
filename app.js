@@ -122,14 +122,14 @@ app.get('/profile', function(req, res) {
 // });
 
 // Route to new user
-app.get('/users/new/', function(req, res) {
+app.get('/signup', function(req, res) {
 	var err = req.query.errors || false;
 	console.log(err);
 
 	if (err !== false) {
-		res.render('users/new', { err: err.split(":")});
+		res.render('site/signup', { err: err.split(":")});
 	} else {
-		res.render('users/new', { err: false});
+		res.render('site/signup', { err: false});
 	}
 });
 
@@ -147,7 +147,7 @@ app.post('/users', function(req, res) {
     	// res.redirect("/login");
     	if (result.hasErrored) {
     		console.log("I found these errors" + result.errors);
-    		res.redirect('/users/new?errors=' + result.errors.join(":"));
+    		res.redirect('/signup?errors=' + result.errors.join(":"));
     	} else {
     		res.redirect("/login");
     	}
