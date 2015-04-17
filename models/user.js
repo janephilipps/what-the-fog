@@ -42,16 +42,20 @@ module.exports = function (sequelize, DataTypes){
         return hash;
       },
       createSecure: function(email, password, zip) {
-        // var error = {};
-        // error.errors = [];
-        // error.hasErrored = false;
+        var error = {};
+        error.errors = [];
+        error.hasErrored = false;
 
         // console.log("hi " + (typeof this.findAndCountAll( { where: { email: email } })));
         // If password is too short, throw error
         if(password.length < 6) {
-          throw new Error("Password too short");
-          // error.errors.push(encodeURI("Your password is too short!"));
-          // error.hasErrored = true;
+          // throw new Error("Password too short");
+          // Push encodeURI error message into array errors in object error
+          error.errors.push(encodeURI("Your password is too short!"));
+          // Set err.hasErrored to true
+          error.hasErrored = true;
+          // Return a new Promise of error that has been resolved
+          return Promise.resolve(error);
         } else {
           // Else, check if user already exists in db
           // Create variable for nested object User
@@ -65,9 +69,13 @@ module.exports = function (sequelize, DataTypes){
               // Check if userCount is greater than 1 (aka check if email in db already)
               if (userCount >= 1) {
                 // If true, throw error
-                throw new Error("Email already exists");
-                // error.errors.push(encodedURI("Email already exists!"));
-                // error.hasErrored = true;
+                // throw new Error("Email already exists");
+                // Push encodeURI error message into array errors in object error
+                error.errors.push(encodeURI("This email is already in use!"));
+                // Set err.hasErrored to true
+                error.hasErrored = true;
+                // Return error aka Promise of error because error is already wrapped in a promise
+                return error;
               } else {
                 // Else, instantiate new User! (Hooray!)
                 console.log("WERE GETTING HERE\n\n\n\n\n");

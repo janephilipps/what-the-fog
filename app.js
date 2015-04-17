@@ -123,7 +123,8 @@ app.get('/profile', function(req, res) {
 
 // Route to new user
 app.get('/users/new/', function(req, res) {
-	var err = req.query.err || false;
+	var err = req.query.errors || false;
+	console.log(err);
 
 	if (err !== false) {
 		res.render('users/new', { err: err.split(":")});
@@ -142,13 +143,14 @@ app.post('/users', function(req, res) {
   // create the new user
   db.User.
     createSecure(email, password, zip).
-    then(function(){
-    	res.redirect("/login");
-    	// if (user.errors) {
-    	// 	res.redirect('users/new?=' + user.errors.join(":"));
-    	// } else {
-    	// 	res.redirect("/login");
-    	// }
+    then(function(result){
+    	// res.redirect("/login");
+    	if (result.hasErrored) {
+    		console.log("I found these errors" + result.errors);
+    		res.redirect('/users/new?errors=' + result.errors.join(":"));
+    	} else {
+    		res.redirect("/login");
+    	}
     });
 });
 
