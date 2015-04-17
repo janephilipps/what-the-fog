@@ -56,11 +56,23 @@ footer a {
 	color: black;
 }
 
+.white {
+	color: white;
+}
+
 /* MOBILE STYLES */
 
 @media handheld, screen and (max-width: 767px) {
 	body {
 		text-align: center;
+	}
+
+	h3 {
+		font-size: 1.75em;
+	}
+
+	p {
+		font-size: 1.5em;
 	}
 
 	#about {
@@ -71,9 +83,11 @@ footer a {
 	#location {
 		text-align: center;
 	}
-
+	
+	/* Centering cloud div */
 	#cloud {
 		margin: 0 auto auto;
+		font-size: 1.5em;
 	}
 
 	/* Centering and spacing form inputs for mobile */
@@ -86,15 +100,6 @@ footer a {
 		margin-right: auto;
 
 	}
-
-/* TABLET STYLES */
-@media handheld, screen and (min-width: 768px) {
-
-	body {
-		margin-left: 5%;
-	}
-
-	footer {
-		text-align: left;
-	}
 }
+
+
