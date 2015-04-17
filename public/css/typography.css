@@ -58,7 +58,7 @@ footer a {
 
 /* MOBILE STYLES */
 
-@media (max-width: 767px) {
+@media handheld, screen and (max-width: 767px) {
 	body {
 		text-align: center;
 	}
@@ -88,7 +88,7 @@ footer a {
 	}
 
 /* TABLET STYLES */
-@media (min-width: 768px) {
+@media handheld, screen and (min-width: 768px) {
 
 	body {
 		margin-left: 5%;
