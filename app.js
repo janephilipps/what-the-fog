@@ -238,7 +238,6 @@ app.post('/locations', function(req, res) {
 						// Redirect to locations
 						res.redirect('/profile');
 					});
-				
 			} else {
 				console.log("I didn't make it");
 			}
