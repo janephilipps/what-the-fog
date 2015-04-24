@@ -1,15 +1,15 @@
 // Require modules
 var db = require('./models');
-var bcrypt = require("bcrypt"),
-	salt = bcrypt.genSaltSync(10),
-	bodyParser = require("body-parser"),
-	ejs = require("ejs"),
-	express = require("express"),
-	methodOverride = require("method-override"),
-	pgHstore = require("pg-hstore"),
-	request = require("request"),
-	session = require("express-session"),
-	env = process.env;
+var bcrypt = require("bcrypt");
+var salt = bcrypt.genSaltSync(10);
+var bodyParser = require("body-parser");
+var ejs = require("ejs");
+var express = require("express");
+var methodOverride = require("method-override");
+var pgHstore = require("pg-hstore");
+var request = require("request");
+var session = require("express-session");
+var env = process.env;
 
 // Instantiate express app
 var app = express();
@@ -17,15 +17,17 @@ var app = express();
 // Set view engine to EJS
 app.set('view engine', 'ejs');
 
+// MIDDLEWARE
+
 // Set up body parser
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up sessions
 app.use(session({
 	secret: 'super secret',
 	resave: false,
 	saveUninitialized: true
-}))
+}));
 
 // Set up static assets
 app.use(express.static('public'));
@@ -38,28 +40,30 @@ app.use("/", function (req, res, next) {
   };
   // Define current user request
   req.currentUser = function () {
-    return db.User.
-      find({
+    return db.User
+      .find({
         where: {
           id: req.session.UserId
        }
-      }).
-      then(function (user) {
+      })
+      .then(function (user) {
         req.user = user;
         return user;
-      })
+      });
   };
   // Define logout request
   req.logout = function () {
     req.session.UserId = null;
     req.user = null;
-  }
+  };
 
   next(); 
 });
 
 // Set up method override to work with POST requests that have the parameter "_method=DELETE"
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+
+// ROUTES
 
 // Route to site index
 app.get('/', function(req, res) {
@@ -83,8 +87,7 @@ app.get('/login', function(req, res) {
 
 // Route to login as a user
 app.post('/login', function(req, res) {
-	// Set variables for user, email, password
-	var user = req.body.user;
+	// Set variables for email, password
 	var email = req.body.user.email;
 	var password = req.body.user.password;
 	// In db User, authenticate email & password entered into login form
@@ -111,9 +114,9 @@ app.get('/profile', function(req, res) {
 				})
 				// Then render profile page with user, userId, and locationsList
 				.then(function(locations) {
-					(res.render('users/profile', {user: user, locationsList: locations, userId: user.id}));
-				})
-			})
+					(res.render('users/profile', { user: user, locationsList: locations, userId: user.id }));
+				});
+			});
 });
 
 // // Route to list users
@@ -127,31 +130,31 @@ app.get('/signup', function(req, res) {
 	console.log(err);
 
 	if (err !== false) {
-		res.render('site/signup', { err: err.split(":")});
+		res.render('site/signup', { err: err.split(":") });
 	} else {
-		res.render('site/signup', { err: false});
+		res.render('site/signup', { err: false });
 	}
 });
 
 // Route to create user via sign-up form
 app.post('/users', function(req, res) {
-	// grab the user from the form
+	// Grab the user from the form
   var email = req.body.email;
   var password = req.body.password;
-  var zip = req.body.zip;
+  // var zip = req.body.zip;
 
-  // create the new user
+  // Create the new user
   db.User.
-    createSecure(email, password, zip).
-    then(function(result){
-    	// res.redirect("/login");
-    	if (result.hasErrored) {
-    		console.log("I found these errors" + result.errors);
-    		res.redirect('/signup?errors=' + result.errors.join(":"));
-    	} else {
-    		res.redirect("/login");
-    	}
-    });
+    createSecure(email, password, zip)
+    	.then(function(result){
+    		// res.redirect("/login");
+    		if (result.hasErrored) {
+    			console.log("I found these errors" + result.errors);
+    			res.redirect('/signup?errors=' + result.errors.join(":"));
+    		} else {
+    			res.redirect("/login");
+    		}
+    	});
 });
 
 // // Route to show user
@@ -164,6 +167,8 @@ app.post('/users', function(req, res) {
 // 	res.render('/users/id');
 // })
 
+
+// FIXME: Need to remember what this does
 app.post('/users/:id', function(req, res) {
 	// grab the user from the login page
 	var email = req.body.email;
@@ -173,7 +178,7 @@ app.post('/users/:id', function(req, res) {
 	db.User.
 		authenticate(email, password)
 		.then(function(user){
-			res.render('users/profile', {user: user});
+			res.render('users/profile', { user: user });
 		});
 
 });
@@ -213,25 +218,26 @@ app.post('/locations', function(req, res) {
 	// If zipCode is undefined or invalid, throw error
 	if (!zipCode) {
 		// throw new Error("Invalid zip code");
+		// TODO: Need to add correct error handling here
 	// Else call Open Weather Map API	
 	} else {
 		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode;
 		request(url, function(err, resp, body) {
-			console.log("I'm in here 1")
+			console.log("I'm in the API request")
 			if (!err && resp.statusCode === 200) {
-				console.log("I'm in here 2");
+				console.log("I'm in the API request with no errors");
 				var jsonData = JSON.parse(body);
 				// if (!jsonData) {
 				// 	res.redirect('/locations', {zips: [], noZips: true});
 				// }
-				// Create data in Locations DB
+				// Create data in Locations db
 				var lat = jsonData.coord.lat;
 				var lon = jsonData.coord.lon;
-				db.Location.create({zip: zipCode, lat: lat, long: lon, UserId: req.session.UserId})
+				db.Location.create({ zip: zipCode, lat: lat, long: lon, UserId: req.session.UserId })
 					.then(function(zip, lat, long) {
 						// Redirect to locations
 						res.redirect('/profile');
-					})
+					});
 				
 			} else {
 				console.log("I didn't make it");
@@ -259,9 +265,10 @@ app.get('/locations/:id', function(req, res) {
 					// Set variable result to the parsed JSON data
 					var result = JSON.parse(body);
 					// Render the individual location view passing the location id and result
-					res.render('locations/location', {id: id, results: result});
+					res.render('locations/location', { id: id, results: result });
 				}
 			});
+			// FIXME: Double check if this is needed
 			//res.render('locations/location', {id: id});
 		});
 	
@@ -278,8 +285,8 @@ app.get('/locations', function(req, res) {
 			})
 			.then(function(locations) {
 				(res.render('users/profile', {locationsList: locations, userId: user.id}));
-			})
-		})
+			});
+		});
 });
 
 // Route to edit location
@@ -302,18 +309,9 @@ app.get('/locations/:id', function(req, res) {
 
 });
 
-// Special code
-
-// app.get('/sync', function(req, res) {
-// 	db.sequelize.sync( {force: true} )
-// 	.then(function( {
-// 		res.send("DB synced successfully");
-// 	}))
-// })
-
 // Start the server
 var server = app.listen(process.env.PORT || 3000, function() {
-// This part just adds a snazzy listening message:
+// Snazzy listening message
 	console.log(new Array(51).join("*"));
   console.log("\t LISTENING ON: \n\t\t localhost:3000");
   console.log(new Array(51).join("*")); 
