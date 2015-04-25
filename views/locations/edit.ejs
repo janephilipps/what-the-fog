@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<% include ../partials/head %>
+	</head>
+	<body>
+		<header>
+			<% include ../partials/header %>
+		</header>
+		<div class="page-wrap">
+			<div class="container">
+				<a href="/profile">Back to Profile</a>
+				<h1>Edit <%= result.zip %></h1>
+				<form action="/locations/<%= id %>?_method=PUT" method="POST">
+			        <input type="text" name="zip" placeholder="New Zip Code">
+			        <button type="submit">Submit</button>
+		    	</form>
+		    	<br>
+		    </div>
+		</div>
+    	<footer>
+			<% include ../partials/footer %>
+		</footer>
+		
+	</body>
+</html>

@@ -21,6 +21,18 @@
 		        <div>
 		            Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
 		        </div>
+		        <div>
+			        <form action="/locations/<%= id %>?_method=PUT" method="POST">
+			        	<button>Edit</button>
+			        </form>
+			    </div>
+
+		        <div>
+		        	<form action="">
+		        		<button>Delete</button>
+		        	</form>
+		        </div>
+		      
 		        <% } %>
 		        <br>
 				<a href="/locations/new">Add new location</a>

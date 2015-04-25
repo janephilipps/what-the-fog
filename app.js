@@ -288,19 +288,34 @@ app.get('/locations', function(req, res) {
 		});
 });
 
-// Route to edit location
-app.get('/locations/:id/edit', function(req, res) {
 
-});
 
 // Route to create location
 app.post('/locations', function(req, res) {
 
 });
 
-// Route to update location - *PATCH*
-app.get('/locations/:id', function(req, res) {
+// Route to form to edit location
+app.get('/locations/:id/edit', function(req, res) {
+	var locationId = req.params.id;
+	db.Location.find(locationId)
+		.then(function(result) {
+			res.render('locations/edit', { result: result, id: req.params.id });		
+		});
+});
 
+// Route to update location - *PUT*
+app.put('/locations/:id', function(req, res) {
+	var locationId = req.params.id;
+	var zip = req.body.zip;
+	db.Location.find(locationId)
+		.then(function(location) {
+			location.updateAttributes({
+				zip: zip })
+			.then(function(savedLocation) {
+				res.redirect('/locations/' + locationId);
+			});
+		});
 });
 
 // Route to delete location - *DELETE*
