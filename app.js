@@ -290,8 +290,19 @@ app.put('/locations/:id', function (req, res) {
 });
 
 // Route to delete location - *DELETE*
-app.get('/locations/:id', function (req, res) {
-
+app.delete('/locations/:id', function (req, res) {
+  console.log("I'm deleting " + req.params.id);
+  db.Location.find({
+    where: {
+      id : req.params.id
+    }
+  })
+  .then(function (location) {
+    location.destroy();
+  })
+  .then( function () {
+    res.redirect('/profile');
+  });
 });
 
 // Start the server

@@ -22,13 +22,13 @@
 		            Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
 		        </div>
 		        <div>
-			        <form action="/locations/<%= id %>?_method=PUT" method="POST">
+		        	<form action="/locations/<%= locationsList[i].id %>/edit" method="GET">
 			        	<button>Edit</button>
 			        </form>
-			    </div>
+			    	</div>
 
 		        <div>
-		        	<form action="">
+		        	<form action="/locations/<%= locationsList[i].id %>?_method=DELETE" method="POST">
 		        		<button>Delete</button>
 		        	</form>
 		        </div>
