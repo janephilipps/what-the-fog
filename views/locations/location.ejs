@@ -4,21 +4,21 @@
 		<link rel="stylesheet" href="/css/style.css">
 		<script>
 
-		// Fogarithm
+  		// Fogarithm
 
-		function isFoggy(temp, dewPoint, visibility) {
-     		if (visibility < 1) {
-     			if (temp - dewPoint <= 4) {
-     				return true;
-     			} else if (dewPoint - temp <= 4) {
-     				return true;
-     			}
-     		} else {
-     			return false;
-     		}
-     	}
+  		function isFoggy(temp, dewPoint, visibility) {
+       		if (visibility < 1) {
+       			if (temp - dewPoint <= 4) {
+       				return true;
+       			} else if (dewPoint - temp <= 4) {
+       				return true;
+       			}
+       		} else {
+       			return false;
+       		}
+       	}
 
-     	isFoggy(results.currently.temperature, results.currently.dewPoint, results.currently.visibility);
+      isFoggy(results.currently.temperature, results.currently.dewPoint, results.currently.visibility);
 
 		</script>
 	</head>
@@ -41,15 +41,18 @@
 				<div class=".col-xs-4 .col-sm-4" id="cloud"><%= results.currently.cloudCover %></div>
 				<div class=".col-xs-4 .col-sm-4"></div>
 			</row>
-
-			<div><h3 class="white">Foggy?</h3><p id="fog"></p></div>
-			<div><h3 class="white">Cloudy?</h3><p id="cloudy"></p></div>
+			<div>
+        <h3 class="white">Foggy?</h3><p id="fog"></p>
+      </div>
+			<div>
+        <h3 class="white">Cloudy?</h3><p id="cloudy"></p>
+      </div>
 		</div>
 	</div>
-			
-		<footer>
-			<% include ../partials/footer %>
-		</footer>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
 		<script src="/js/style.js"></script>
 	</body>
 </html>

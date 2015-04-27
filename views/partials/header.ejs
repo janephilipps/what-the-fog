@@ -8,13 +8,16 @@
         </div>
 
         <ul class="nav navbar-nav">
+        <% if (!loggedIn) { %>
             <li><a href="/signup">Sign Up</a></li>
             <li><a href="/login">Log In</a></li>
+        <% } else { %>
+            <li><a href="/logout">Log Out</a></li>
+        <% } %>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
-            
 
         </ul>
-      
+
     </div>
 </nav>

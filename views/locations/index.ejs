@@ -8,15 +8,14 @@
 		</header>
 		<h1>User Id: <%= userId %></h1>
 		<h1>Locations</h1>
-        <% for (var i = 0; i < locationsList.length; i++) { %>
-        <div>
-            Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
-        </div>
-        <% } %>
-        <br>
+    <% for (var i = 0; i < locationsList.length; i++) { %>
+    <div>
+      Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
+    </div>
+    <% } %>
+    <br>
 		<footer>
 			<% include ../partials/footer %>
 		</footer>
-		
 	</body>
 </html>

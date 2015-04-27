@@ -68,7 +68,9 @@ app.use(methodOverride('_method'));
 
 // Route to site index
 app.get('/', function (req, res) {
-  res.render('site/index');
+  var loggedIn = req.session.UserId;
+  console.log(loggedIn);
+  res.render('site/index', { loggedIn: loggedIn });
 });
 
 // Route to site about
@@ -175,7 +177,7 @@ app.post('/users', function (req, res) {
 // });
 
 // Route to logout user
-app.delete('/logout', function (req, res) {
+app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/login');
 })
