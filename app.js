@@ -75,17 +75,20 @@ app.get('/', function (req, res) {
 
 // Route to site about
 app.get('/about', function (req, res) {
-  res.render('site/about');
+  var loggedIn = req.session.UserId;
+  res.render('site/about', { loggedIn: loggedIn });
 });
 
 // Route to site contact
 app.get('/contact', function (req, res) {
-  res.render('site/contact');
+  var loggedIn = req.session.UserId;
+  res.render('site/contact', { loggedIn: loggedIn });
 });
 
 // Route to login page
 app.get('/login', function (req, res) {
-  res.render('site/login');
+  var loggedIn = req.session.UserId;
+  res.render('site/login', { loggedIn: loggedIn });
 });
 
 // Route to login as a user
@@ -106,6 +109,7 @@ app.post('/login', function (req, res) {
 
 // Route to profile page with saved location list
 app.get('/profile', function (req, res) {
+  var loggedIn = req.session.UserId;
   // Request current User
   req.currentUser()
     // Then find all Locations for current User
@@ -120,7 +124,8 @@ app.get('/profile', function (req, res) {
         (res.render('users/profile', {
           user: user,
           locationsList: locations,
-          userId: user.id
+          userId: user.id,
+          loggedIn: loggedIn
         }));
       });
     });
@@ -128,13 +133,14 @@ app.get('/profile', function (req, res) {
 
 // Route to new user
 app.get('/signup', function (req, res) {
+  var loggedIn = req.session.UserId;
   var err = req.query.errors || false;
   console.log(err);
 
   if (err !== false) {
-    res.render('site/signup', { err: err.split(":") });
+    res.render('site/signup', { err: err.split(":"), loggedIn: loggedIn });
   } else {
-    res.render('site/signup', { err: false });
+    res.render('site/signup', { err: false, loggedIn: loggedIn });
   }
 });
 
@@ -184,7 +190,8 @@ app.get('/logout', function (req, res) {
 
 // Route to page to add new location
 app.get('/locations/new', function (req, res) {
-  res.render('locations/new');
+  var loggedIn = req.session.UserId;
+  res.render('locations/new', { loggedIn: loggedIn });
 });
 
 // Route to add a new location
@@ -224,6 +231,7 @@ app.post('/locations', function (req, res) {
 
 // Route to show location
 app.get('/locations/:id', function (req, res) {
+  var loggedIn = req.session.UserId;
   // Parse id from URL
   var id = req.params.id;
   // Find location in the db by id
@@ -241,7 +249,7 @@ app.get('/locations/:id', function (req, res) {
           // Set variable result to the parsed JSON data
           var result = JSON.parse(body);
           // Render the individual location view passing the location id and result
-          res.render('locations/location', { id: id, results: result });
+          res.render('locations/location', { id: id, results: result, loggedIn: loggedIn });
         }
       });
       // FIXME: Double check if this is needed
@@ -252,6 +260,7 @@ app.get('/locations/:id', function (req, res) {
 
 // Route to list locations
 app.get('/locations', function (req, res) {
+  var loggedIn = req.session.UserId;
   req.currentUser()
     .then(function (user) {
       db.Location.findAll({
@@ -262,7 +271,8 @@ app.get('/locations', function (req, res) {
       .then(function (locations) {
         (res.render('users/profile', {
           locationsList: locations,
-          userId: user.id
+          userId: user.id,
+          loggedIn: loggedIn
         }));
       });
     });
@@ -270,10 +280,11 @@ app.get('/locations', function (req, res) {
 
 // Route to form to edit location
 app.get('/locations/:id/edit', function (req, res) {
+  var loggedIn = req.session.UserId;
   var locationId = req.params.id;
   db.Location.find(locationId)
     .then(function (result) {
-      res.render('locations/edit', { result: result, id: req.params.id });
+      res.render('locations/edit', { result: result, id: req.params.id, loggedIn: loggedIn });
     });
 });
 
