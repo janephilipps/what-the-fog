@@ -33,13 +33,13 @@
 			<% include ../partials/header %>
 		</header>
 		<div class="container">
-		<a href="/profile">Back to Profile</a>
+		
 		<h1>Zip Code: <%= id.zip %></h1>
 		<div id="location">
 			<p>Latitude: <%= id.lat %></p>
 			<p>Longitude: <%= id.long %></p>
-			<p>Temperature: <%= Math.round(results.currently.temperature) %> &deg;F</p>
-			<p>Dew Point: <%= Math.round(results.currently.dewPoint) %> &deg;F</p>
+			<p>Temperature: <%= Math.round(results.currently.temperature) %>&deg;F</p>
+			<p>Dew Point: <%= Math.round(results.currently.dewPoint) %>&deg;F</p>
 			<p>Visibility: <%= results.currently.visibility %> miles</p>
 			<p>Cloud Cover:</p>
 			<row>
