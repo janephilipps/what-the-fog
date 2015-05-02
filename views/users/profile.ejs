@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<% include ../partials/head %>
+		<link rel="stylesheet" href="/css/style.css">
 	</head>
 	<body>
 		<header>
@@ -16,27 +17,32 @@
 				<!-- <a href="/locations">Your saved locations</a>
 				<br> -->
 
+				<a href="/locations/new">Add new location</a>
+				<br>
+				<br>
+
 				<p>Your Saved Locations:</p>
+
 		        <% for (var i = 0; i < locationsList.length; i++) { %>
-		        <div>
+		        <div class="location">
+		        <div class="zip">
 		            Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
 		        </div>
-		        <div>
+		        <div class="zip">
 		        	<form action="/locations/<%= locationsList[i].id %>/edit" method="GET">
 			        	<button>Edit</button>
 			        </form>
 			    	</div>
 
-		        <div>
+		        <div class="zip">
 		        	<form action="/locations/<%= locationsList[i].id %>?_method=DELETE" method="POST">
 		        		<button>Delete</button>
 		        	</form>
 		        </div>
-
+						</div>
 		        <% } %>
-		        <br>
-				<a href="/locations/new">Add new location</a>
-				<br>
+
+
 				<br>
 		    	<br>
 		    </div>

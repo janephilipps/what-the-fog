@@ -24,3 +24,11 @@
 	border-radius: 100%;
 	background-color: grey;
 }*/
+
+.location {
+	display: block;
+}
+
+.zip {
+	display: inline-block;
+}
