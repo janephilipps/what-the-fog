@@ -18,6 +18,12 @@
        		}
        	}
 
+      // function isMisty(temp, dewPoint, visibility) {
+      //   if (visibility < 3.1) {
+
+      //   }
+      // }
+
       isFoggy(results.currently.temperature, results.currently.dewPoint, results.currently.visibility);
 
 		</script>
@@ -32,13 +38,13 @@
 		<div id="location">
 			<p>Latitude: <%= id.lat %></p>
 			<p>Longitude: <%= id.long %></p>
-			<p>Temperature: <%= results.currently.temperature %></p>
-			<p>Dew Point: <%= results.currently.dewPoint %></p>
-			<p>Visibility: <%= results.currently.visibility %></p>
+			<p>Temperature: <%= Math.round(results.currently.temperature) %> &deg;F</p>
+			<p>Dew Point: <%= Math.round(results.currently.dewPoint) %> &deg;F</p>
+			<p>Visibility: <%= results.currently.visibility %> miles</p>
 			<p>Cloud Cover:</p>
 			<row>
 				<div class=".col-xs-4 .col-sm-4"></div>
-				<div class=".col-xs-4 .col-sm-4" id="cloud"><%= results.currently.cloudCover %></div>
+				<div class=".col-xs-4 .col-sm-4" id="cloud"><%= (results.currently.cloudCover * 100) %>%</div>
 				<div class=".col-xs-4 .col-sm-4"></div>
 			</row>
 			<div>
