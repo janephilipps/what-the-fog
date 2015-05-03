@@ -44,7 +44,7 @@
 			<p>Cloud Cover:</p>
 			<row>
 				<div class=".col-xs-4 .col-sm-4"></div>
-				<div class=".col-xs-4 .col-sm-4" id="cloud"><%= (results.currently.cloudCover * 100) %>%</div>
+				<div class=".col-xs-4 .col-sm-4" id="cloud"><%= Math.round(results.currently.cloudCover * 100) %>%</div>
 				<div class=".col-xs-4 .col-sm-4"></div>
 			</row>
 			<div>
