@@ -1,11 +1,11 @@
 "use strict";
 var bcrypt = require("bcrypt");
-var salt = bcrypt.genSaltSync(10);
+var salt   = bcrypt.genSaltSync(10);
 
 module.exports = function (sequelize, DataTypes){
   var User = sequelize.define('User', {
-    email: { 
-      type: DataTypes.STRING, 
+    email: {
+      type: DataTypes.STRING,
       unique: true,
       validate: {
         len: [6, 30]
@@ -27,29 +27,27 @@ module.exports = function (sequelize, DataTypes){
 
   {
     instanceMethods: {
-      checkPassword: function(password) {
+      checkPassword: function (password) {
         return bcrypt.compareSync(password, this.passwordDigest);
       }
     },
+
     classMethods: {
 
-      associate: function(models) {
+      associate: function (models) {
         this.hasMany(models.Location);
       },
 
-      encryptPassword: function(password) {
+      encryptPassword: function (password) {
         var hash = bcrypt.hashSync(password, salt);
         return hash;
       },
-      createSecure: function(email, password, zip) {
+      createSecure: function (email, password, zip) {
         var error = {};
         error.errors = [];
         error.hasErrored = false;
-
-        // console.log("hi " + (typeof this.findAndCountAll( { where: { email: email } })));
         // If password is too short, throw error
         if(password.length < 6) {
-          // throw new Error("Password too short");
           // Push encodeURI error message into array errors in object error
           error.errors.push(encodeURI("Your password is too short!"));
           // Set err.hasErrored to true
@@ -69,7 +67,6 @@ module.exports = function (sequelize, DataTypes){
               // Check if userCount is greater than 1 (aka check if email in db already)
               if (userCount >= 1) {
                 // If true, throw error
-                // throw new Error("Email already exists");
                 // Push encodeURI error message into array errors in object error
                 error.errors.push(encodeURI("This email is already in use!"));
                 // Set err.hasErrored to true
@@ -77,8 +74,7 @@ module.exports = function (sequelize, DataTypes){
                 // Return error aka Promise of error because error is already wrapped in a promise
                 return error;
               } else {
-                // Else, instantiate new User! (Hooray!)
-                console.log("WERE GETTING HERE\n\n\n\n\n");
+                // Else, instantiate new User!
                 return _this.create({
                   email: email,
                   passwordDigest: _this.encryptPassword(password),
@@ -87,14 +83,14 @@ module.exports = function (sequelize, DataTypes){
             });
         }
       },
-      authenticate: function(email, password) {
+      authenticate: function (email, password) {
         // find a user in the DB
         return this.find({
           where: {
             email: email
           }
-        }) 
-        .then(function(user){
+        })
+        .then(function (user){
           if (user === null){
             throw new Error("Username does not exist");
           } else if (user.checkPassword(password)) {
@@ -106,7 +102,7 @@ module.exports = function (sequelize, DataTypes){
         });
       }
 
-    } // close classMethods
-  }); // close define user
+    }
+  });
   return User;
-}; // close User function
+};

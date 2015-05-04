@@ -1,34 +1,115 @@
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Futura;
+  background-color: darkgrey
+}
+
+.page-wrap {
+  min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -142px;
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+
+footer, .page-wrap:after {
+  height: 142px; 
+}
+
+a {
+  color: white;
+}
+
+body a:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+.contact {
+  display: block;
+}
+
+header {
+  background-color: white;
+
+}
+
+footer {
+  background-color: white;
+  color: black;
+}
+
+footer a {
+  color: black;
+}
+
+.white {
+  color: white;
+}
+
 #cloud {
-	text-align: center;
-	width: 200px;
-	height: 200px;
-	/*display: block;
-	position: relative;*/
-	border-radius: 100%;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
 }
-
-/*#cloud::after {
-	background:url(/img/cloud.png) no-repeat;
-	content: "";
-	position: absolute;
-	z-index: 1;
-}*/
-
-#cloud p {
-	padding-top: 50px;
-}
-
-/*#fog {
-	width: 200px;
-	height: 200px;
-	border-radius: 100%;
-	background-color: grey;
-}*/
 
 .location {
-	display: block;
+  display: block;
 }
 
 .zip {
-	display: inline-block;
+  display: inline-block;
+}
+
+/* MOBILE STYLES */
+
+@media handheld, screen and (max-width: 767px) {
+  body {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 1.75em;
+  }
+
+  p {
+    font-size: 1.5em;
+  }
+
+  #about {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  #location {
+    text-align: center;
+  }
+
+  /* Centering cloud div */
+  #cloud {
+    margin: 0 auto auto;
+    font-size: 1.5em;
+  }
+
+  /* Centering and spacing form inputs for mobile */
+  form input {
+    text-align: center;
+    display: block;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
 }

@@ -9,45 +9,40 @@
 		</header>
 		<div class="container">
 			<div class="page-wrap">
-
 				<h1>Profile</h1>
-
 				<p>Welcome, <%= user.email  %>!</p>
 				<!-- <p>Your User Id is: <%= userId %></p> -->
 				<!-- <a href="/locations">Your saved locations</a>
 				<br> -->
-
 				<a href="/locations/new">Add new location</a>
 				<br>
 				<br>
-
 				<p>Your Saved Locations:</p>
 
-		        <% for (var i = 0; i < locationsList.length; i++) { %>
-		        <div class="location">
-		        <div class="zip">
-		            Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
-		        </div>
-		        <div class="zip">
-		        	<form action="/locations/<%= locationsList[i].id %>/edit" method="GET">
-			        	<button>Edit</button>
-			        </form>
-			    	</div>
+        <% for (var i = 0; i < locationsList.length; i++) { %>
+        <div class="location">
+        <div class="zip">
+            Zip Code: <a href="/locations/<%= locationsList[i].id %>"><%= locationsList[i].zip %></a>
+        </div>
+        <div class="zip">
+        	<form action="/locations/<%= locationsList[i].id %>/edit" method="GET">
+	        	<button>Edit</button>
+	        </form>
+	    	</div>
 
-		        <div class="zip">
-		        	<form action="/locations/<%= locationsList[i].id %>?_method=DELETE" method="POST">
-		        		<button>Delete</button>
-		        	</form>
-		        </div>
-						</div>
-		        <% } %>
-
+        <div class="zip">
+        	<form action="/locations/<%= locationsList[i].id %>?_method=DELETE" method="POST">
+        		<button>Delete</button>
+        	</form>
+        </div>
+				</div>
+        <% } %>
 
 				<br>
-		    	<br>
-		    </div>
-	    </div>
-    	<footer>
+		    <br>
+		  </div>
+	  </div>
+    <footer>
 			<% include ../partials/footer %>
 		</footer>
 	</body>

@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.renameColumn(
     	'Locations',
     	'user_id',
@@ -10,7 +10,7 @@ module.exports = {
     done();
   },
 
-  down: function(migration, DataTypes, done) {
+  down: function (migration, DataTypes, done) {
     // add reverting commands here, calling 'done' when finished
     done();
   }

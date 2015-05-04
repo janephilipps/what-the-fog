@@ -1,4 +1,5 @@
 window.onload = function() {
+
 	var el = document.getElementById('cloud');
 	var opacity = parseFloat(el.innerHTML) / 100;
 	console.log(el);
@@ -15,9 +16,6 @@ window.onload = function() {
 		fog.setAttribute("style", "opacity: 1")
 	}
 
-	// console.log("["+opacity+"]");
-	// console.log(typeof opacity);
-
 	if (opacity === 0) {
 		cloudy.innerHTML = "Not cloudy.";
 	} else if (opacity > 0 && opacity < .25) {
@@ -32,5 +30,4 @@ window.onload = function() {
 		cloudy.innerHTML = "Too cloudy.";
 	}
 
-	// fog.setAttribute("style", "background-color: rgba(128,")
 };

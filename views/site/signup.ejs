@@ -9,28 +9,25 @@
 		<div class="page-wrap">
 			<div class="container">
 				<!-- If an error occurs -->
-                <% if (err) {
+        <% if (err) {
+          err.forEach(function(errorMessage) { %>
 
-                    err.forEach(function(errorMessage) {
+        <div class="error"><%= errorMessage %></div>
 
-                %>
-
-                    <div class="error"><%= errorMessage %></div>
-
-                <% }); // Ends the forEach loop
-                } // Ends the if statement
-                %>
+        <% }); // Ends the forEach loop
+          } // Ends the if statement
+        %>
 				<h1>Sign Up</h1>
 				<form action="/users" method="POST">
-			        <input type="text" name="email" placeholder="Email Address">
-			        <input type="password" name="password" placeholder="Password">
-			        <!-- <input type="text" name="zip" placeholder="Zip Code"> -->
-			        <button type="submit">Sign Up</button>
-		    	</form>
-		    	<br>
-		    </div>
-		   </div>
-    	<footer>
+			    <input type="text" name="email" placeholder="Email Address">
+			    <input type="password" name="password" placeholder="Password">
+			    <!-- <input type="text" name="zip" placeholder="Zip Code"> -->
+			    <button type="submit">Sign Up</button>
+		    </form>
+		    <br>
+		  </div>
+		</div>
+    <footer>
 			<% include ../partials/footer %>
 		</footer>
 	</body>

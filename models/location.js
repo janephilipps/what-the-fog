@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Location = sequelize.define("Location", {
     zip: {
       type: DataTypes.STRING,
@@ -7,12 +7,12 @@ module.exports = function(sequelize, DataTypes) {
         len: [4,6],
       }
     },
-    
+
     long: DataTypes.INTEGER,
     lat: DataTypes.INTEGER
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: function (models) {
         this.belongsTo(models.User);
       }
     }

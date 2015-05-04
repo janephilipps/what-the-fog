@@ -166,22 +166,6 @@ app.post('/users', function (req, res) {
       });
 });
 
-// CHECK THIS WHEN APP IS WORKING
-// // FIXME: Need to remember what this does
-// app.post('/users/:id', function (req, res) {
-//   // grab the user from the login page
-//   var email = req.body.email;
-//   var password = req.body.password;
-
-//   // check that the user exists in the db
-//   db.User.
-//     authenticate(email, password)
-//     .then(function (user){
-//       res.render('users/profile', { user: user });
-//     });
-
-// });
-
 // Route to logout user
 app.get('/logout', function (req, res) {
   req.logout();
