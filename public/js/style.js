@@ -5,7 +5,6 @@ window.onload = function() {
 	el.setAttribute("style", "background-color: rgba(255,255,255," + opacity + ")" );
 
 	var fog = document.getElementById('fog');
-	var foggy = isFoggy();
 
 	if (foggy) {
 		fog.innerHTML = "Yep.";

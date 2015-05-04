@@ -16,7 +16,11 @@
      		}
       }
 
-      isFoggy(results.currently.temperature, results.currently.dewPoint, results.currently.visibility);
+      var foggy = isFoggy(
+        <%= results.currently.temperature %>,
+        <%= results.currently.dewPoint %>,
+        <%= results.currently.visibility %>
+      );
 
 		</script>
 	</head>
