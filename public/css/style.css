@@ -8,7 +8,7 @@ html, body {
 
 body {
   font-family: Futura;
-  background-color: darkgrey
+  background-color: darkgrey;
 }
 
 .page-wrap {
@@ -23,7 +23,7 @@ body {
 }
 
 footer, .page-wrap:after {
-  height: 142px; 
+  height: 142px;
 }
 
 a {

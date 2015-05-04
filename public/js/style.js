@@ -2,8 +2,7 @@ window.onload = function() {
 
 	var el = document.getElementById('cloud');
 	var opacity = parseFloat(el.innerHTML) / 100;
-	console.log(el);
-	el.setAttribute("style", "background-color: rgba(255,255,255,"+opacity+")");
+	el.setAttribute("style", "background-color: rgba(255,255,255," + opacity + ")" );
 
 	var fog = document.getElementById('fog');
 	var foggy = isFoggy();
