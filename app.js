@@ -56,7 +56,7 @@ app.use("/", function (req, res, next) {
     req.session.UserId = null;
     req.user = null;
   };
-  // TODO: Comment here
+
   next();
 });
 
@@ -149,7 +149,6 @@ app.post('/users', function (req, res) {
   // Grab the user from the form
   var email = req.body.email;
   var password = req.body.password;
-  // TODO: Grab user's home zip
 
   // Create the new user
   db.User
@@ -186,8 +185,8 @@ app.post('/locations', function (req, res) {
   console.log(zipCode);
   // If zipCode is undefined or invalid, throw error
   if (!zipCode) {
-    // throw new Error("Invalid zip code");
-    // TODO: Need to add correct error handling here
+    throw new Error("Invalid zip code");
+    // TODO: Improve error handling for UX
   // Else call Open Weather Map API
   } else {
     var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode;
@@ -236,8 +235,6 @@ app.get('/locations/:id', function (req, res) {
           res.render('locations/location', { id: id, results: result, loggedIn: loggedIn });
         }
       });
-      // FIXME: Double check if this is needed
-      //res.render('locations/location', {id: id});
     });
 
 });
@@ -268,7 +265,11 @@ app.get('/locations/:id/edit', function (req, res) {
   var locationId = req.params.id;
   db.Location.find(locationId)
     .then(function (result) {
-      res.render('locations/edit', { result: result, id: req.params.id, loggedIn: loggedIn });
+      res.render('locations/edit', {
+        result: result,
+        id: req.params.id,
+        loggedIn: loggedIn
+      });
     });
 });
 
@@ -278,8 +279,7 @@ app.put('/locations/:id', function (req, res) {
   var zip = req.body.zip;
   db.Location.find(locationId)
     .then(function (location) {
-      location.updateAttributes({
-        zip: zip })
+      location.updateAttributes({ zip: zip })
       .then(function (savedLocation) {
         res.redirect('/locations/' + locationId);
       });
@@ -304,7 +304,6 @@ app.delete('/locations/:id', function (req, res) {
 
 // Start the server
 var server = app.listen(process.env.PORT || 3000, function() {
-// Snazzy listening message
   console.log(new Array(51).join("*"));
   console.log("\t LISTENING ON: \n\t\t localhost:3000");
   console.log(new Array(51).join("*"));
