@@ -152,7 +152,7 @@ app.post('/users', function (req, res) {
 
   // Create the new user
   db.User
-    .createSecure(email, password, zip)
+    .createSecure(email, password)
       .then(function (result) {
 
         if (result.hasErrored) {
