@@ -87,6 +87,15 @@ footer a {
     font-size: 1.5em;
   }
 
+  .navbar-brand {
+    float: none;
+    clear: both;
+  }
+
+  .navbar-header {
+    margin-top: 15px;
+  }
+
   #about {
     margin-left: 5%;
     margin-right: 5%;
