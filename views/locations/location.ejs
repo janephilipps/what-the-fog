@@ -1,20 +1,20 @@
 <html>
 
-	<head>
-		<% include ../partials/head %>
-		<script>
+  <head>
+    <% include ../partials/head %>
+    <script>
 
-  		// Fogarithm
-  		function isFoggy (temp, dewPoint, visibility) {
-     		if (visibility < 1) {
-     			if (temp - dewPoint <= 4) {
-     				return true;
-     			} else if (dewPoint - temp <= 4) {
-     				return true;
-     			}
-     		} else {
-     			return false;
-     		}
+      // Fogarithm
+      function isFoggy (temp, dewPoint, visibility) {
+        if (visibility < 1) {
+          if (temp - dewPoint <= 4) {
+            return true;
+          } else if (dewPoint - temp <= 4) {
+            return true;
+          }
+        } else {
+          return false;
+        }
       }
 
       var foggy = isFoggy(
@@ -23,44 +23,44 @@
         <%= results.currently.visibility %>
       );
 
-		</script>
-	</head>
+    </script>
+  </head>
 
-	<body>
+  <body>
 
-		<header>
-			<% include ../partials/header %>
-		</header>
+    <header>
+      <% include ../partials/header %>
+    </header>
 
-		<div class="container">
-    	<h1>Zip Code: <%= id.zip %></h1>
-		  <div id="location">
-			  <p>Latitude: <%= id.lat %></p>
-			  <p>Longitude: <%= id.long %></p>
-			  <p>Temperature: <%= Math.round(results.currently.temperature) %>&deg;F</p>
-			  <p>Dew Point: <%= Math.round(results.currently.dewPoint) %>&deg;F</p>
-			  <p>Visibility: <%= results.currently.visibility %> miles</p>
-			  <p>Cloud Cover:</p>
-			  <row>
-				  <div class=".col-xs-4 .col-sm-4"></div>
-				  <div class=".col-xs-4 .col-sm-4" id="cloud"><%= Math.round(results.currently.cloudCover * 100) %>%</div>
-				  <div class=".col-xs-4 .col-sm-4"></div>
-			  </row>
-			  <div>
+    <div class="container">
+      <h1>Zip Code: <%= id.zip %></h1>
+      <div id="location">
+        <p>Latitude: <%= id.lat %></p>
+        <p>Longitude: <%= id.long %></p>
+        <p>Temperature: <%= Math.round(results.currently.temperature) %>&deg;F</p>
+        <p>Dew Point: <%= Math.round(results.currently.dewPoint) %>&deg;F</p>
+        <p>Visibility: <%= results.currently.visibility %> miles</p>
+        <p>Cloud Cover:</p>
+        <row>
+          <div class=".col-xs-4 .col-sm-4"></div>
+          <div class=".col-xs-4 .col-sm-4" id="cloud"><%= Math.round(results.currently.cloudCover * 100) %>%</div>
+          <div class=".col-xs-4 .col-sm-4"></div>
+        </row>
+        <div>
           <h3 class="white">Foggy?</h3><p id="fog"></p>
         </div>
-			  <div>
+        <div>
           <h3 class="white">Cloudy?</h3><p id="cloudy"></p>
         </div>
-		  </div>
-	  </div>
+      </div>
+    </div>
 
-	  <footer>
-		  <% include ../partials/footer %>
-	  </footer>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
 
-		<script src="/js/style.js"></script>
+    <script src="/js/style.js"></script>
 
-	</body>
+  </body>
 
 </html>

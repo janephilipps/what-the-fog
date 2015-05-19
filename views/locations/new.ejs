@@ -1,26 +1,26 @@
 <html>
-	<head>
-		<% include ../partials/head %>
-	</head>
-	<body>
-		<header>
-			<% include ../partials/header %>
-		</header>
-		<div class="page-wrap">
-			<div class="container">
-				<h1>Add Location</h1>
-				<form action="/locations" method="POST">
-			    <input type="text" name="zip" placeholder="Zip Code*">
-			    <button type="submit">Submit</button>
-		    </form>
-		    <div>
-		    	<p>*US 5-digit zip codes only!</p>
-		    </div>
-		    <br>
-		  </div>
-		</div>
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header>
+      <% include ../partials/header %>
+    </header>
+    <div class="page-wrap">
+      <div class="container">
+        <h1>Add Location</h1>
+        <form action="/locations" method="POST">
+          <input type="text" name="zip" placeholder="Zip Code*">
+          <button type="submit">Submit</button>
+        </form>
+        <div>
+          <p>*US 5-digit zip codes only!</p>
+        </div>
+        <br>
+      </div>
+    </div>
     <footer>
-			<% include ../partials/footer %>
-		</footer>
-	</body>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
 </html>
