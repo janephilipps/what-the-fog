@@ -1,23 +1,23 @@
 <html>
-	<head>
-		<% include ../partials/head %>
-	</head>
-	<body>
-		<header>
-			<% include ../partials/header %>
-		</header>
-		<div class="container">
-			<div class="page-wrap">
-				<h1>Log In</h1>
-				<form action="/login" method="POST">
-			    <input type="text" name="user[email]" placeholder="Email Address">
-			    <input type="password" name="user[password]" placeholder="Password">
-			    <button type="submit">Log In</button>
-		    </form>
-		  </div>
-		</div>
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header>
+      <% include ../partials/header %>
+    </header>
+    <div class="container">
+      <div class="page-wrap">
+        <h1>Log In</h1>
+        <form action="/login" method="POST">
+          <input type="text" name="user[email]" placeholder="Email Address">
+          <input type="password" name="user[password]" placeholder="Password">
+          <button type="submit">Log In</button>
+        </form>
+      </div>
+    </div>
     <footer>
-			<% include ../partials/footer %>
-		</footer>
-	</body>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
 </html>
