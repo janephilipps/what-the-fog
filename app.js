@@ -69,7 +69,6 @@ app.use(methodOverride('_method'));
 // Route to site index
 app.get('/', function (req, res) {
   var loggedIn = req.session.UserId;
-  console.log(loggedIn);
   res.render('site/index', { loggedIn: loggedIn });
 });
 
@@ -135,7 +134,6 @@ app.get('/profile', function (req, res) {
 app.get('/signup', function (req, res) {
   var loggedIn = req.session.UserId;
   var err = req.query.errors || false;
-  console.log(err);
 
   if (err !== false) {
     res.render('site/signup', { err: err.split(":"), loggedIn: loggedIn });
@@ -156,7 +154,6 @@ app.post('/users', function (req, res) {
       .then(function (result) {
 
         if (result.hasErrored) {
-          console.log("I found these errors" + result.errors);
           res.redirect('/signup?errors=' + result.errors.join(":"));
         } else {
           res.redirect("/login");
@@ -181,8 +178,6 @@ app.get('/locations/new', function (req, res) {
 app.post('/locations', function (req, res) {
   // Parse zipcode from form
   var zipCode = req.body.zip;
-  // Log variable zipCode
-  console.log(zipCode);
   // If zipCode is undefined or invalid, throw error
   if (!zipCode) {
     throw new Error("Invalid zip code");
@@ -223,8 +218,6 @@ app.get('/locations/:id', function (req, res) {
     .then(function (id) {
       // Set url variable for API call
       var url = "https://api.forecast.io/forecast/" + env.MY_API_KEY + "/" + id.lat + "," + id.long;
-      // Log API url
-      console.log(url);
       // Call API
       request(url, function (err, resp, body) {
         // If no errors and response status code is 200
@@ -288,7 +281,6 @@ app.put('/locations/:id', function (req, res) {
 
 // Route to delete location - *DELETE*
 app.delete('/locations/:id', function (req, res) {
-  console.log("I'm deleting " + req.params.id);
   db.Location.find({
     where: {
       id : req.params.id

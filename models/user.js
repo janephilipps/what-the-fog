@@ -62,8 +62,6 @@ module.exports = function (sequelize, DataTypes){
           return this.count( {where: { email: email } } )
             // Then run this function on userCount
             .then( function(userCount) {
-              // Log count # in console
-              console.log("count returned " + JSON.stringify(userCount));
               // Check if userCount is greater than 1 (aka check if email in db already)
               if (userCount >= 1) {
                 // If true, throw error
