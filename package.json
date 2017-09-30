@@ -2,6 +2,9 @@
   "name": "project_1",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "6.11.1"
+  },
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^0.8.2",
